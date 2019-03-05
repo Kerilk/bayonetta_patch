@@ -46,7 +46,7 @@ __attribute((thiscall))
     int32_t
     (*const bayoAllocaAttachPoints)(struct bayoActor_s *actor,
                               int32_t numAttachPoints,
-                              struct bayoInstance_s instance)
+                              struct bayoInstance_s **pInstance)
     = (void *)0x00451B20;
 
 static
