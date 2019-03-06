@@ -18,9 +18,12 @@ int32_t
 bayoLoad_pl0012_new(struct bayoActor_s *actor) {
     void *wtbHandle;
     void *wmbHandle;
+    void *attHandle;
     struct bayoMesh_s *mesh;
     int32_t result;
     int32_t i;
+    int32_t numAttachPoints;
+    struct bayoAttachPoint_s *pAttachPoints;
     __attribute((thiscall))
         void
         (* fptr)(struct bayoActor_s *, int32_t);
@@ -30,10 +33,25 @@ bayoLoad_pl0012_new(struct bayoActor_s *actor) {
 
     result = bayoLoad_WMB_WTB(actor, wmbHandle, wtbHandle);
     if (result) {
-        bayoAllocaAttachPoints(actor, 3, pBayoGlobalInstance2);
-        bayoAttachBone(actor, 0, 9, 0);
-        bayoAttachBone(actor, 41, 15, 0);
-        bayoAttachBone(actor, 82, 6, 0);
+        attHandle = bayoGetAssetHandle("pl0012.dat\\pl0012.att");
+        if(attHandle && *(int32_t *)attHandle > 0) {
+            numAttachPoints = *(int32_t *)attHandle;
+            pAttachPoints = (struct bayoAttachPoint_s *)
+                ((int32_t *)attHandle + 1);
+
+            bayoAllocaAttachPoints(actor, numAttachPoints, pBayoGlobalInstance2);
+            for(i = 0; i < numAttachPoints; i++) {
+                bayoAttachBone(actor,
+                               pAttachPoints[i].sourceBoneIndex,
+                               pAttachPoints[i].targetBoneIndex,
+                               pAttachPoints[i].option);
+            }
+        } else {
+            bayoAllocaAttachPoints(actor, 3, pBayoGlobalInstance2);
+            bayoAttachBone(actor, 0, 9, 0);
+            bayoAttachBone(actor, 41, 15, 0);
+            bayoAttachBone(actor, 82, 6, 0);
+        }
         wtbHandle = bayoGetAssetHandle(pl0012_pl0012texA_wtb);
         bayoLoadWTBStatic(
                (struct bayoTextureCacheItem_s *)MEMBER_ADDR_AT_OFFSET(
