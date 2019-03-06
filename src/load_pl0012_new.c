@@ -50,9 +50,6 @@ bayoLoad_pl0012_new(struct bayoActor_s *actor) {
     struct bayoMesh_s *mesh;
     int32_t result;
     int32_t i;
-    __attribute((thiscall))
-        void
-        (* fptr)(struct bayoActor_s *, int32_t);
 
     wtbHandle = bayoGetAssetHandle(pl0012_pl0012_wtb);
     wmbHandle = bayoGetAssetHandle(pl0012_pl0012_wmb);
@@ -96,31 +93,19 @@ bayoLoad_pl0012_new(struct bayoActor_s *actor) {
         for (i = 0; i < 4; i++) {
             mesh = bayoGetActorMesh(actor, i);
             if (mesh) {
-                *(uint32_t *)MEMBER_ADDR_AT_OFFSET(
-                    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(mesh, 0x70),
-                    0x10) &= 0xFFFFFFBF;
-                *(uint32_t *)MEMBER_ADDR_AT_OFFSET(
-                    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(mesh, 0x70),
-                    0x10) |= 0x00002000;
+                mesh->pUnknownSubstruct->flags &= 0xFFFFFFBF;
+                mesh->pUnknownSubstruct->flags |= 0x00002000;
             }
         }
 
         for (i = 8; i < 12; i++) {
             mesh = bayoGetActorMesh(actor, i);
             if (mesh) {
-                *(uint32_t *)MEMBER_ADDR_AT_OFFSET(
-                    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(mesh, 0x70),
-                    0x10) &= 0xFFFFFFBF;
-                *(uint32_t *)MEMBER_ADDR_AT_OFFSET(
-                    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(mesh, 0x70),
-                    0x10) |= 0x00002000;
+                mesh->pUnknownSubstruct->flags &= 0xFFFFFFBF;
+                mesh->pUnknownSubstruct->flags |= 0x00002000;
             }
         }
-        fptr = (__attribute((thiscall)) void (*)(struct bayoActor_s *, int32_t))
-                *(uintptr_t *)MEMBER_ADDR_AT_OFFSET(
-                    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(actor, 0x0),
-                    0x8);
-        fptr(actor, 0);
+        actor->funcs->func3(actor, 0);
         *(uint32_t *)MEMBER_ADDR_AT_OFFSET(actor, 0x6920) = 0;
         result = 1;
     }
