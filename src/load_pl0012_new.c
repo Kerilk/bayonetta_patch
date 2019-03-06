@@ -12,6 +12,34 @@ extern int dummy;
 
 #define MEMBER_ADDR_AT_OFFSET(ptr, offset) ((uintptr_t)(ptr) + offset)
 
+static
+__attribute((thiscall))
+__attribute__ ((noinline))
+int32_t
+bayoLoadATT(struct bayoActor_s *actor, void *attHandle) {
+    int32_t numAttachPoints;
+    struct bayoAttachPoint_s *pAttachPoints;
+    int32_t res;
+    int32_t i;
+
+    res = 0;
+    if(attHandle && *(int32_t *)attHandle > 0) {
+        numAttachPoints = *(int32_t *)attHandle;
+        pAttachPoints = (struct bayoAttachPoint_s *)
+                ((int32_t *)attHandle + 1);
+
+        bayoAllocaAttachPoints(actor, numAttachPoints, pBayoGlobalInstance2);
+        for(i = 0; i < numAttachPoints; i++) {
+            bayoAttachBone(actor,
+                           pAttachPoints[i].sourceBoneIndex,
+                           pAttachPoints[i].targetBoneIndex,
+                           pAttachPoints[i].option);
+        }
+        res = 1;
+    }
+    return res;
+}
+
 extern
 __attribute((thiscall))
 int32_t
@@ -22,8 +50,6 @@ bayoLoad_pl0012_new(struct bayoActor_s *actor) {
     struct bayoMesh_s *mesh;
     int32_t result;
     int32_t i;
-    int32_t numAttachPoints;
-    struct bayoAttachPoint_s *pAttachPoints;
     __attribute((thiscall))
         void
         (* fptr)(struct bayoActor_s *, int32_t);
@@ -34,19 +60,7 @@ bayoLoad_pl0012_new(struct bayoActor_s *actor) {
     result = bayoLoad_WMB_WTB(actor, wmbHandle, wtbHandle);
     if (result) {
         attHandle = bayoGetAssetHandle("pl0012.dat\\pl0012.att");
-        if(attHandle && *(int32_t *)attHandle > 0) {
-            numAttachPoints = *(int32_t *)attHandle;
-            pAttachPoints = (struct bayoAttachPoint_s *)
-                ((int32_t *)attHandle + 1);
-
-            bayoAllocaAttachPoints(actor, numAttachPoints, pBayoGlobalInstance2);
-            for(i = 0; i < numAttachPoints; i++) {
-                bayoAttachBone(actor,
-                               pAttachPoints[i].sourceBoneIndex,
-                               pAttachPoints[i].targetBoneIndex,
-                               pAttachPoints[i].option);
-            }
-        } else {
+        if( !bayoLoadATT(actor, attHandle) ) {
             bayoAllocaAttachPoints(actor, 3, pBayoGlobalInstance2);
             bayoAttachBone(actor, 0, 9, 0);
             bayoAttachBone(actor, 41, 15, 0);
