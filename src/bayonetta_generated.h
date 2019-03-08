@@ -639,7 +639,7 @@ struct bayoTextureCacheItem_t {
 struct bayoActorFuncs_t {
     dword field_0;
     dword field_4;
-    void (* func3)(struct bayoActor_t *, int);
+    __attribute((thiscall)) void (* func3)(struct bayoActor_t *, int);
 };
 
 struct bayoMesh_t {
