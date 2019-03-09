@@ -25,9 +25,9 @@ typedef struct bayoBone_t bayoBone_t, *PbayoBone_t;
 
 typedef struct matrix4x4_t matrix4x4_t, *Pmatrix4x4_t;
 
-typedef struct wmb_t wmb_t, *Pwmb_t;
+typedef struct bayoWmb_t bayoWmb_t, *PbayoWmb_t;
 
-typedef struct bayoSamplersInfos_t bayoSamplersInfos_t, *PbayoSamplersInfos_t;
+typedef struct bayoSamplers_t bayoSamplers_t, *PbayoSamplers_t;
 
 typedef struct bayoMesh_t bayoMesh_t, *PbayoMesh_t;
 
@@ -35,13 +35,15 @@ typedef struct vector3_t vector3_t, *Pvector3_t;
 
 typedef struct bayoContext_t bayoContext_t, *PbayoContext_t;
 
-typedef struct bayoActorMotionInfos_t bayoActorMotionInfos_t, *PbayoActorMotionInfos_t;
+typedef struct bayoMotionInfos_t bayoMotionInfos_t, *PbayoMotionInfos_t;
 
 typedef struct bayoExp_t bayoExp_t, *PbayoExp_t;
 
 typedef struct vector4_t vector4_t, *Pvector4_t;
 
 typedef struct matLine4_t matLine4_t, *PmatLine4_t;
+
+typedef struct wmbHeader_t wmbHeader_t, *PwmbHeader_t;
 
 typedef struct bayoSamplerData_t bayoSamplerData_t, *PbayoSamplerData_t;
 
@@ -63,7 +65,7 @@ typedef struct motHeader_t motHeader_t, *PmotHeader_t;
 
 typedef struct bayoRecordKeyCacheItem_t bayoRecordKeyCacheItem_t, *PbayoRecordKeyCacheItem_t;
 
-typedef struct bayoSeqStruct_t bayoSeqStruct_t, *PbayoSeqStruct_t;
+typedef struct bayoSeq_t bayoSeq_t, *PbayoSeq_t;
 
 typedef struct bayoUnknownFloatList_t bayoUnknownFloatList_t, *PbayoUnknownFloatList_t;
 
@@ -71,9 +73,9 @@ typedef struct bayoTransform_t bayoTransform_t, *PbayoTransform_t;
 
 typedef struct bayoBlendAnimSubstruct_t bayoBlendAnimSubstruct_t, *PbayoBlendAnimSubstruct_t;
 
-typedef struct bayoUnknownMotionInfosSubstruct_t bayoUnknownMotionInfosSubstruct_t, *PbayoUnknownMotionInfosSubstruct_t;
+typedef struct bayoMotionInfosSubstruct_t bayoMotionInfosSubstruct_t, *PbayoMotionInfosSubstruct_t;
 
-typedef struct bayoVertexBuffers_t bayoVertexBuffers_t, *PbayoVertexBuffers_t;
+typedef struct bayoVertexBuffer_t bayoVertexBuffer_t, *PbayoVertexBuffer_t;
 
 typedef struct bayoBatch_t bayoBatch_t, *PbayoBatch_t;
 
@@ -81,7 +83,7 @@ typedef struct bayoTextureCacheItem_t bayoTextureCacheItem_t, *PbayoTextureCache
 
 typedef struct bayoMeshGeometryTableSubstruct_t bayoMeshGeometryTableSubstruct_t, *PbayoMeshGeometryTableSubstruct_t;
 
-typedef struct bayoVertexBuffer_t bayoVertexBuffer_t, *PbayoVertexBuffer_t;
+typedef struct bayoVertexBufferCacheItem_t bayoVertexBufferCacheItem_t, *PbayoVertexBufferCacheItem_t;
 
 typedef struct bayoIndexStream_t bayoIndexStream_t, *PbayoIndexStream_t;
 
@@ -111,22 +113,11 @@ struct matrix4x4_t {
     struct matLine4_t d;
 };
 
-struct bayoSamplersInfos_t {
+struct bayoSamplers_t {
     void * wtbHandle;
     struct bayoSamplerData_t * pSamplers;
-    dword samplerCount;
+    uint samplerCount;
     dword field_C;
-};
-
-struct bayoExp_t {
-    void * expHandle;
-    struct bayoActor_t * pActor;
-    dword flags; /* 0x1 disable */
-    float fArray[4];
-    uint iArray[4];
-    char fArrayCount;
-    char iArrayCount;
-    word field_2E;
 };
 
 struct vector4_t {
@@ -141,7 +132,16 @@ struct bayoUnknownFloatList_t {
     float values[16];
 };
 
-struct bayoUnknownMotionInfosSubstruct_t {
+struct bayoSeq_t {
+    void * seqHandle;
+    dword flags0;
+    dword flags1;
+    float previousDate;
+    float date;
+    float lastFrame;
+};
+
+struct bayoMotionInfosSubstruct_t {
     dword field_0;
     void * unknownPtr;
     uint unknownTag;
@@ -162,16 +162,7 @@ struct bayoUnknownMotionInfosSubstruct_t {
     dword field_44;
 };
 
-struct bayoSeqStruct_t {
-    void * seqHandle;
-    dword flags0;
-    dword flags1;
-    float previousDate;
-    float date;
-    float lastFrame;
-};
-
-struct bayoActorMotionInfos_t {
+struct bayoMotionInfos_t {
     struct bayoActor_t * actor;
     struct motHeader_t * motHandle;
     struct bayoRecordKeyCacheItem_t * cachedKeys;
@@ -188,7 +179,7 @@ struct bayoActorMotionInfos_t {
     dword field_34;
     dword field_38;
     dword field_3C;
-    struct bayoSeqStruct_t seqStruct;
+    struct bayoSeq_t seqStruct;
     dword field_58;
     dword field_5C;
     struct bayoUnknownFloatList_t unknownFloatList;
@@ -233,9 +224,20 @@ struct bayoActorMotionInfos_t {
     byte field_1AA;
     byte field_1AB;
     uint unknownFlags; /* 0x1 : animate */
-    struct bayoUnknownMotionInfosSubstruct_t unknownSubstruct1;
-    struct bayoUnknownMotionInfosSubstruct_t unknownSubstruct2;
+    struct bayoMotionInfosSubstruct_t unknownSubstruct1;
+    struct bayoMotionInfosSubstruct_t unknownSubstruct2;
     dword field_240;
+};
+
+struct bayoExp_t {
+    void * expHandle;
+    struct bayoActor_t * pActor;
+    dword flags; /* 0x1 disable */
+    float fArray[4];
+    uint iArray[4];
+    char fArrayCount;
+    char iArrayCount;
+    word field_2E;
 };
 
 struct bayoBone_t {
@@ -248,7 +250,7 @@ struct bayoBone_t {
     struct vector4_t cumulativeScale;
     float orientation;
     struct matrix4x4_t * additionalTransform;
-    dword globalBoneIndex;
+    int globalBoneIndex;
     dword rotationOrder;
     struct bayoBone_t * parent;
     struct bayoBone_t * next_bone;
@@ -272,6 +274,10 @@ struct vector3_t {
     float z;
 };
 
+struct bayoWmb_t {
+    struct wmbHeader_t * pWmbHeader;
+};
+
 struct bayoActor_t {
     struct bayoActorFuncs_t * funcs;
     void * field_4;
@@ -280,12 +286,12 @@ struct bayoActor_t {
     struct bayoBone_t baseBone;
     struct matrix4x4_t transform;
     struct matrix4x4_t inverseTransform;
-    struct wmb_t * wmb;
+    struct bayoWmb_t wmb;
     struct matrix4x4_t * pTransformMatricesBis;
     struct matrix4x4_t * pInverseTransformMatrices;
     struct matrix4x4_t * pTransformMatrices;
-    struct bayoSamplersInfos_t samplers;
-    struct bayoSamplersInfos_t animatedSamplers;
+    struct bayoSamplers_t samplers;
+    struct bayoSamplers_t animatedSamplers;
     struct bayoMesh_t * firstMesh;
     struct bayoMesh_t * * ppMeshes;
     dword numMeshes;
@@ -404,7 +410,7 @@ struct bayoActor_t {
     dword field_3C4;
     dword field_3C8;
     dword field_3CC;
-    struct bayoActorMotionInfos_t motionInfos;
+    struct bayoMotionInfos_t motionInfos;
     dword field_614;
     dword field_618;
     dword field_61C;
@@ -432,11 +438,19 @@ struct bayoRecordKeyCacheItem_t {
     int index;
 };
 
-struct bayoVertexBuffer_t {
+struct bayoVertexBufferCacheItem_t {
     void * pStream;
     void * pSourceStream;
     uint structSize;
     uint numVertices;
+};
+
+struct bayoVertexBuffer_t {
+    struct bayoVertexBufferCacheItem_t vertexStream;
+    dword field_10;
+    dword field_14;
+    dword field_18;
+    dword field_1C;
 };
 
 struct bayoMaterialVectorTableItem_t {
@@ -539,6 +553,43 @@ struct bayoTex_t {
     int bAbsent;
 };
 
+struct wmbHeader_t {
+    uint id;
+    uint field_4;
+    uint vertexFormat;
+    uint numVertices;
+    uchar numMapping;
+    uchar vertexExData;
+    ushort field_12;
+    uint offsetPositions;
+    uint offsetVertices;
+    uint offsetVerticesExData;
+    dword field_20;
+    dword field_24;
+    dword field_28;
+    dword field_2C;
+    uint numBones;
+    uint offsetBoneHierarchy;
+    uint offsetBoneRelativePositions;
+    uint offsetBonePositions;
+    uint offsetBoneIndexTranslateTable;
+    uint numMaterials;
+    uint offsetMaterialsOffsets;
+    uint offsetMaterials;
+    uint numMeshes;
+    uint offsetMeshesOffsets;
+    uint offsetMeshes;
+    dword field_5C;
+    dword field_60;
+    uint offsetUnknown;
+    uint offsetBoneSymmetries;
+    uint offsetBoneFlags;
+    dword field_70;
+    dword field_74;
+    dword field_78;
+    dword field_7C;
+};
+
 struct bayoMaterialFuncTable_t {
     int (* field_0)(int *);
     int (* field_4)(int *);
@@ -575,21 +626,13 @@ struct bayoContext_t {
     struct bayoInstance_t * * ppBayoInstance;
 };
 
-struct bayoVertexBuffers_t {
-    struct bayoVertexBuffer_t vertexStream;
-    dword field_10;
-    dword field_14;
-    dword field_18;
-    dword field_1C;
-};
-
 struct bayoBuffers_t {
     int maxBoneRef;
-    struct bayoVertexBuffers_t positions;
-    struct bayoVertexBuffers_t vertices;
-    struct bayoVertexBuffers_t verticesExData;
-    struct bayoVertexBuffers_t normals;
-    struct bayoSamplersInfos_t samplerInfos;
+    struct bayoVertexBuffer_t positions;
+    struct bayoVertexBuffer_t vertices;
+    struct bayoVertexBuffer_t verticesExData;
+    struct bayoVertexBuffer_t normals;
+    struct bayoSamplers_t samplerInfos;
     int vertexSize;
     int numBatch;
     struct bayoBatch_t * pBatches;
@@ -639,7 +682,7 @@ struct bayoTextureCacheItem_t {
 struct bayoActorFuncs_t {
     dword field_0;
     dword field_4;
-    __attribute((thiscall)) void (* func3)(struct bayoActor_t *, int);
+    __thiscall void (* func3)(struct bayoActor_t *, int);
 };
 
 struct bayoMesh_t {
@@ -850,43 +893,6 @@ struct bayoInstance_t {
     dword field_E4;
 };
 
-struct wmb_t {
-    uint id;
-    uint field_4;
-    uint vertexFormat;
-    uint numVertices;
-    uchar numMapping;
-    uchar vertexExData;
-    ushort field_12;
-    uint offsetPositions;
-    uint offsetVertices;
-    uint offsetVerticesExData;
-    dword field_20;
-    dword field_24;
-    dword field_28;
-    dword field_2C;
-    uint numBones;
-    uint offsetBoneHierarchy;
-    uint offsetBoneRelativePositions;
-    uint offsetBonePositions;
-    uint offsetBoneIndexTranslateTable;
-    uint numMaterials;
-    uint offsetMaterialsOffsets;
-    uint offsetMaterials;
-    uint numMeshes;
-    uint offsetMeshesOffsets;
-    uint offsetMeshes;
-    dword field_5C;
-    dword field_60;
-    uint offsetUnknown;
-    uint offsetBoneSymmetries;
-    uint offsetBoneFlags;
-    dword field_70;
-    dword field_74;
-    dword field_78;
-    dword field_7C;
-};
-
 typedef struct bayoAttachPoint_t bayoAttachPoint_t, *PbayoAttachPoint_t;
 
 struct bayoAttachPoint_t {
@@ -936,15 +942,6 @@ struct bayoBlendAnimDescriptor_t {
     dword field_C;
     dword field_10;
     struct bayoRecordKeyCacheItem_t * cachedKeys;
-};
-
-typedef struct bayoBufferCacheItem_t bayoBufferCacheItem_t, *PbayoBufferCacheItem_t;
-
-struct bayoBufferCacheItem_t {
-    void * pVals;
-    void * bufferAddress;
-    dword field_8;
-    dword field_C;
 };
 
 typedef struct bayoCacheItem_t bayoCacheItem_t, *PbayoCacheItem_t;
@@ -1621,53 +1618,9 @@ struct bayoCamera_t {
     int setToOne;
 };
 
+typedef struct bayoCloth_t bayoCloth_t, *PbayoCloth_t;
+
 typedef struct bayoClothItem_t bayoClothItem_t, *PbayoClothItem_t;
-
-struct bayoClothItem_t {
-    short no;
-    short noUp;
-    short noDown;
-    short noSide;
-    short noPoly;
-    short noFix;
-    float distanceToParent;
-    float distanceToSide;
-    dword field_14;
-    dword field_18;
-    float angle;
-    struct vector4_t offset;
-    struct vector4_t unitVector;
-    struct vector4_t unknownVector;
-    struct vector4_t transformedOffset;
-    struct vector4_t transformedOffsetBis;
-    dword field_70;
-    dword field_74;
-    dword field_78;
-    dword field_7C;
-    dword field_80;
-    dword field_84;
-    dword field_88;
-    dword field_8C;
-    dword field_90;
-    dword field_94;
-    dword field_98;
-    dword field_9C;
-    struct vector4_t field_A0;
-    struct vector4_t * pParentTransformedOffset;
-    struct vector4_t * pSideTransformedOffset;
-    struct vector4_t * pParentField_A0;
-    struct vector4_t * pSideField_A0;
-    struct vector4_t * pPolyParentTransformedOffset;
-    struct vector4_t * pPolyTransformedOffset;
-    float coeff;
-    float sideCoeff;
-    float rotLimit;
-    struct bayoBone_t * pBone;
-    struct bayoBone_t * boneFix;
-    dword field_DC;
-};
-
-typedef struct bayoClothPhysics_t bayoClothPhysics_t, *PbayoClothPhysics_t;
 
 typedef struct clpItem_t clpItem_t, *PclpItem_t;
 
@@ -1676,19 +1629,6 @@ typedef struct bayoHitItem_t bayoHitItem_t, *PbayoHitItem_t;
 typedef struct bayoWindItem_t bayoWindItem_t, *PbayoWindItem_t;
 
 typedef struct clwItem_t clwItem_t, *PclwItem_t;
-
-struct clwItem_t {
-    int windType;
-    int partsNo;
-    struct vector3_t offset;
-    struct vector3_t offset2;
-    float radius;
-    float power;
-    float timer;
-    float swingRate;
-    float swingSpd;
-    float delayMax;
-};
 
 struct bayoWindItem_t {
     dword windType;
@@ -1713,7 +1653,7 @@ struct bayoWindItem_t {
     dword field_7C;
 };
 
-struct bayoClothPhysics_t {
+struct bayoCloth_t {
     int clpInitialized;
     dword field_4;
     dword field_8;
@@ -2817,6 +2757,19 @@ struct bayoClothPhysics_t {
     undefined field_0xd1f;
 };
 
+struct clwItem_t {
+    int windType;
+    int partsNo;
+    struct vector3_t offset;
+    struct vector3_t offset2;
+    float radius;
+    float power;
+    float timer;
+    float swingRate;
+    float swingSpd;
+    float delayMax;
+};
+
 struct clpItem_t {
     short no;
     short noUp;
@@ -2837,6 +2790,50 @@ struct bayoHitItem_t {
     struct vector4_t offset;
     struct vector4_t offset2;
     struct vector4_t unknownVector;
+};
+
+struct bayoClothItem_t {
+    short no;
+    short noUp;
+    short noDown;
+    short noSide;
+    short noPoly;
+    short noFix;
+    float distanceToParent;
+    float distanceToSide;
+    dword field_14;
+    dword field_18;
+    float angle;
+    struct vector4_t offset;
+    struct vector4_t unitVector;
+    struct vector4_t unknownVector;
+    struct vector4_t transformedOffset;
+    struct vector4_t transformedOffsetBis;
+    dword field_70;
+    dword field_74;
+    dword field_78;
+    dword field_7C;
+    dword field_80;
+    dword field_84;
+    dword field_88;
+    dword field_8C;
+    dword field_90;
+    dword field_94;
+    dword field_98;
+    dword field_9C;
+    struct vector4_t field_A0;
+    struct vector4_t * pParentTransformedOffset;
+    struct vector4_t * pSideTransformedOffset;
+    struct vector4_t * pParentField_A0;
+    struct vector4_t * pSideField_A0;
+    struct vector4_t * pPolyParentTransformedOffset;
+    struct vector4_t * pPolyTransformedOffset;
+    float coeff;
+    float sideCoeff;
+    float rotLimit;
+    struct bayoBone_t * pBone;
+    struct bayoBone_t * boneFix;
+    dword field_DC;
 };
 
 typedef struct bayoMaterialVectorTable_t bayoMaterialVectorTable_t, *PbayoMaterialVectorTable_t;
@@ -2884,9 +2881,9 @@ struct bayoSamplerCache_t {
     struct bayoSamplerCacheItem_t defaultSampler;
 };
 
-typedef struct bayoSceneRelatedStruct_t bayoSceneRelatedStruct_t, *PbayoSceneRelatedStruct_t;
+typedef struct bayoScene_t bayoScene_t, *PbayoScene_t;
 
-struct bayoSceneRelatedStruct_t {
+struct bayoScene_t {
     dword field_0;
     dword field_4;
     struct bayoCamera_t * pCamera;
@@ -2908,6 +2905,23 @@ struct bayoViewport_t {
     int height;
     float minZ;
     float maxZ;
+};
+
+typedef struct bayoWtb_t bayoWtb_t, *PbayoWtb_t;
+
+typedef struct wtbHeader_t wtbHeader_t, *PwtbHeader_t;
+
+struct bayoWtb_t {
+    struct wtbHeader_t * pWtbHeader;
+};
+
+struct wtbHeader_t {
+    uint id;
+    uint unknown;
+    uint numTex;
+    uint offsetTextureOffsets;
+    uint offsetTextureSizes;
+    uint offsetTextureFlags;
 };
 
 typedef struct clhItem_t clhItem_t, *PclhItem_t;
@@ -3206,16 +3220,5 @@ struct wmbMeshHeader_t {
     dword field_1C;
     char name[32];
     struct wmbMeshBoundingBox_t boundingBox;
-};
-
-typedef struct wtb_t wtb_t, *Pwtb_t;
-
-struct wtb_t {
-    uint id;
-    uint unknown;
-    uint numTex;
-    uint offsetTextureOffsets;
-    uint offsetTextureSizes;
-    uint offsetTextureFlags;
 };
 

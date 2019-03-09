@@ -13,10 +13,10 @@ extern int dummy;
 #define MEMBER_ADDR_AT_OFFSET(ptr, offset) ((uintptr_t)(ptr) + offset)
 
 static
-__attribute((thiscall))
-__attribute__ ((noinline))
+__thiscall
+__attribute__((noinline))
 int32_t
-bayoLoadATT(struct bayoActor_t *actor, void *attHandle) {
+bayoActor_loadATT(struct bayoActor_t *actor, void *attHandle) {
     int32_t numAttachPoints;
     struct bayoAttachPoint_t *pAttachPoints;
     int32_t res;
@@ -28,12 +28,14 @@ bayoLoadATT(struct bayoActor_t *actor, void *attHandle) {
         pAttachPoints = (struct bayoAttachPoint_t *)
                 ((int32_t *)attHandle + 1);
 
-        bayoAllocaAttachPoints(actor, numAttachPoints, pBayoGlobalInstance2);
+        bayoActor_allocInitAttachPoints(actor,
+                                     numAttachPoints,
+                                     pBayoGlobalInstance2);
         for(i = 0; i < numAttachPoints; i++) {
-            bayoAttachBone(actor,
-                           pAttachPoints[i].sourceBoneIndex,
-                           pAttachPoints[i].targetBoneIndex,
-                           pAttachPoints[i].option);
+            bayoActor_attachBone(actor,
+                                 pAttachPoints[i].sourceBoneIndex,
+                                 pAttachPoints[i].targetBoneIndex,
+                                 pAttachPoints[i].option);
         }
         res = 1;
     }
@@ -41,9 +43,9 @@ bayoLoadATT(struct bayoActor_t *actor, void *attHandle) {
 }
 
 extern
-__attribute((thiscall))
+__thiscall
 int32_t
-bayoLoad_pl0012_new(struct bayoActor_t *actor) {
+bayo_load_pl0012_pl0012_new(struct bayoActor_t *actor) {
     void *wtbHandle;
     void *wmbHandle;
     void *attHandle;
@@ -51,47 +53,47 @@ bayoLoad_pl0012_new(struct bayoActor_t *actor) {
     int32_t result;
     int32_t i;
 
-    wtbHandle = bayoGetAssetHandle(pl0012_pl0012_wtb);
-    wmbHandle = bayoGetAssetHandle(pl0012_pl0012_wmb);
+    wtbHandle = bayo_getAssetHandle(pl0012_pl0012_wtb);
+    wmbHandle = bayo_getAssetHandle(pl0012_pl0012_wmb);
 
-    result = bayoLoad_WMB_WTB(actor, wmbHandle, wtbHandle);
+    result = bayoActor_loadWMBAndWTB(actor, wmbHandle, wtbHandle);
     if (result) {
-        attHandle = bayoGetAssetHandle("pl0012.dat\\pl0012.att");
-        if( !bayoLoadATT(actor, attHandle) ) {
-            bayoAllocaAttachPoints(actor, 3, pBayoGlobalInstance2);
-            bayoAttachBone(actor, 0, 9, 0);
-            bayoAttachBone(actor, 41, 15, 0);
-            bayoAttachBone(actor, 82, 6, 0);
+        attHandle = bayo_getAssetHandle("pl0012.dat\\pl0012.att");
+        if( !bayoActor_loadATT(actor, attHandle) ) {
+            bayoActor_allocInitAttachPoints(actor, 3, pBayoGlobalInstance2);
+            bayoActor_attachBone(actor, 0, 9, 0);
+            bayoActor_attachBone(actor, 41, 15, 0);
+            bayoActor_attachBone(actor, 82, 6, 0);
         }
-        wtbHandle = bayoGetAssetHandle(pl0012_pl0012texA_wtb);
-        bayoLoadWTBStatic(
+        wtbHandle = bayo_getAssetHandle(pl0012_pl0012texA_wtb);
+        bayoTextureCacheItem_loadWTBDynamic(
                (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
                    actor,
                    0x0BF0),
                wtbHandle);
-        wtbHandle = bayoGetAssetHandle(pl0012_pl0012texB_wtb);
-        bayoLoadWTBStatic(
+        wtbHandle = bayo_getAssetHandle(pl0012_pl0012texB_wtb);
+        bayoTextureCacheItem_loadWTBDynamic(
                (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
                    actor,
                    0x0C00),
                wtbHandle);
-        wtbHandle = bayoGetAssetHandle(pl0012_pl0012texC_wtb);
-        bayoLoadWTBStatic(
+        wtbHandle = bayo_getAssetHandle(pl0012_pl0012texC_wtb);
+        bayoTextureCacheItem_loadWTBDynamic(
                (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
                    actor,
                    0x0C10),
                wtbHandle);
-        wtbHandle = bayoGetAssetHandle(pl0012_pl0012texD_wtb);
-        bayoLoadWTBStatic(
+        wtbHandle = bayo_getAssetHandle(pl0012_pl0012texD_wtb);
+        bayoTextureCacheItem_loadWTBDynamic(
                (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
                    actor,
                    0x0C20),
                wtbHandle);
 
-        bayoSetMeshesUnknownFlags(actor, 0x13);
+        bayoActor_setMeshesUnknownFlags(actor, 0x13);
 
         for (i = 0; i < 4; i++) {
-            mesh = bayoGetActorMesh(actor, i);
+            mesh = bayoActor_getMesh(actor, i);
             if (mesh) {
                 mesh->pUnknownSubstruct->flags &= 0xFFFFFFBF;
                 mesh->pUnknownSubstruct->flags |= 0x00002000;
@@ -99,7 +101,7 @@ bayoLoad_pl0012_new(struct bayoActor_t *actor) {
         }
 
         for (i = 8; i < 12; i++) {
-            mesh = bayoGetActorMesh(actor, i);
+            mesh = bayoActor_getMesh(actor, i);
             if (mesh) {
                 mesh->pUnknownSubstruct->flags &= 0xFFFFFFBF;
                 mesh->pUnknownSubstruct->flags |= 0x00002000;
