@@ -18,8 +18,38 @@ import ghidra.program.model.pcode.*;
 import ghidra.program.model.address.*;
 
 
-public class IterateUserNamedFunctionScript extends GhidraScript {
+public class exportBayonettaFunctions extends GhidraScript {
+	
+	private String print_parameters(String substring, Function function) {
+		Parameter[] parameters = function.getParameters();
+		ArrayList<String> temp = new ArrayList<String>();
+		if (parameters.length == 0) {
+			substring += "void";
 
+		} else {
+			for (Parameter p : parameters ) {
+				if(p.getDataType() instanceof Pointer) {
+					Pointer ptr = (Pointer) p.getDataType();
+					if(ptr.getDataType() instanceof FunctionDefinition) {
+						FunctionDefinition fd = (FunctionDefinition) ptr.getDataType();
+						String funcprt_arg = fd.getPrototypeString();
+						funcprt_arg = funcprt_arg.replace(fd.getName()+"(", "(*)(");
+						funcprt_arg = "\t" +fd.getGenericCallingConvention().toString() + " " + funcprt_arg;
+						temp.add(funcprt_arg);
+						
+					} else {
+						temp.add("\t" + p.getDataType() + " " + p.getName());
+					}
+				} else {
+					temp.add("\t" + p.getDataType() + " " + p.getName());
+				}
+			}
+			substring += String.join(",\n", temp);
+			substring += "\n";
+		}
+		return substring;
+	}
+	
     public void run() throws Exception {
     	
     	File file = askFile("target file","Select");
@@ -44,8 +74,13 @@ public class IterateUserNamedFunctionScript extends GhidraScript {
 					(!function.isThunk() || function.getThunkedFunction(false).isExternal()) &&
 					function.getEntryPoint().getOffset() < 0x05DB8000) {
 				 
-				String substring = function.getPrototypeString(false, true) + " = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
-				substring = substring.replace(function.getName()+"(", "(*" + function.getName() + ")(");
+				//String substring = function.getPrototypeString(false, true) + " = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
+				//substring = substring.replace(function.getName()+"(", "(*" + function.getName() + ")(");
+				String substring = "" +
+								   function.getCallingConventionName() + "\n" + function.getReturnType() +
+								   "\n(*" + function.getName() + ")(\n";
+				substring = print_parameters(substring, function);
+				substring += ") = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
 				String[] tuple = {function.getName(), substring};
 				array.add(tuple);
 			}
