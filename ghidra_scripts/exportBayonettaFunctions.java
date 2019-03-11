@@ -1,3 +1,4 @@
+
 //Iterate over user function that were named by the user. 
 //@category Iteration
 
@@ -17,9 +18,8 @@ import ghidra.program.model.lang.*;
 import ghidra.program.model.pcode.*;
 import ghidra.program.model.address.*;
 
-
 public class exportBayonettaFunctions extends GhidraScript {
-	
+
 	private String print_parameters(String substring, Function function) {
 		Parameter[] parameters = function.getParameters();
 		ArrayList<String> temp = new ArrayList<String>();
@@ -27,16 +27,16 @@ public class exportBayonettaFunctions extends GhidraScript {
 			substring += "void";
 
 		} else {
-			for (Parameter p : parameters ) {
-				if(p.getDataType() instanceof Pointer) {
+			for (Parameter p : parameters) {
+				if (p.getDataType() instanceof Pointer) {
 					Pointer ptr = (Pointer) p.getDataType();
-					if(ptr.getDataType() instanceof FunctionDefinition) {
+					if (ptr.getDataType() instanceof FunctionDefinition) {
 						FunctionDefinition fd = (FunctionDefinition) ptr.getDataType();
 						String funcprt_arg = fd.getPrototypeString();
-						funcprt_arg = funcprt_arg.replace(fd.getName()+"(", "(*)(");
-						funcprt_arg = "\t" +fd.getGenericCallingConvention().toString() + " " + funcprt_arg;
+						funcprt_arg = funcprt_arg.replace(fd.getName() + "(", "(*)(");
+						funcprt_arg = "\t" + fd.getGenericCallingConvention().toString() + " " + funcprt_arg;
 						temp.add(funcprt_arg);
-						
+
 					} else {
 						temp.add("\t" + p.getDataType() + " " + p.getName());
 					}
@@ -49,11 +49,11 @@ public class exportBayonettaFunctions extends GhidraScript {
 		}
 		return substring;
 	}
-	
-    public void run() throws Exception {
-    	
-    	File file = askFile("target file","Select");
-    	java.io.FileWriter fw = new java.io.FileWriter(file, false);
+
+	public void run() throws Exception {
+
+		File file = askFile("target file", "Select");
+		java.io.FileWriter fw = new java.io.FileWriter(file, false);
 		Function function = getFirstFunction();
 		ArrayList<String[]> array = new ArrayList<String[]>();
 
@@ -67,21 +67,20 @@ public class exportBayonettaFunctions extends GhidraScript {
 				break;
 			}
 
-			if (function.getSignatureSource() == SourceType.USER_DEFINED && 
-					!function.getName().startsWith("j_") &&
-					!function.getName().startsWith("nullsub") &&
-					!function.getName().startsWith("FUN_") &&
-					(!function.isThunk() || function.getThunkedFunction(false).isExternal()) &&
-					function.getEntryPoint().getOffset() < 0x05DB8000) {
-				 
-				//String substring = function.getPrototypeString(false, true) + " = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
-				//substring = substring.replace(function.getName()+"(", "(*" + function.getName() + ")(");
-				String substring = "" +
-								   function.getCallingConventionName() + "\n" + function.getReturnType() +
-								   "\n(*" + function.getName() + ")(\n";
+			if (function.getSignatureSource() == SourceType.USER_DEFINED && !function.getName().startsWith("j_")
+					&& !function.getName().startsWith("nullsub") && !function.getName().startsWith("FUN_")
+					&& (!function.isThunk() || function.getThunkedFunction(false).isExternal())
+					&& function.getEntryPoint().getOffset() < 0x05DB8000) {
+
+				// String substring = function.getPrototypeString(false, true) + " = (void *)0x"
+				// + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
+				// substring = substring.replace(function.getName()+"(", "(*" +
+				// function.getName() + ")(");
+				String substring = "" + function.getCallingConventionName() + "\n" + function.getReturnType() + "\n(*"
+						+ function.getName() + ")(\n";
 				substring = print_parameters(substring, function);
 				substring += ") = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
-				String[] tuple = {function.getName(), substring};
+				String[] tuple = { function.getName(), substring };
 				array.add(tuple);
 			}
 			function = getFunctionAfter(function);
@@ -91,16 +90,16 @@ public class exportBayonettaFunctions extends GhidraScript {
 				return sa1[0].compareTo(sa2[0]);
 			}
 		});
-		
+
 		String string = "";
-		for(String[] sa: array)
+		for (String[] sa : array)
 			string = string + sa[1];
-		
+
 		fw.write(string);
 		fw.close();
-		//monitor.setMessage(string);
-		//println(string);
+		// monitor.setMessage(string);
+		// println(string);
 
-    }
+	}
 
 }
