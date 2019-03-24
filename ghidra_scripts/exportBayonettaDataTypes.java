@@ -1,7 +1,7 @@
 
 //TODO write a description for this script
 //@author 
-//@category Data Types
+//@category Bayonetta
 //@keybinding 
 //@menupath 
 //@toolbar 
@@ -84,7 +84,11 @@ public class exportBayonettaDataTypes extends GhidraScript {
 
 	private String declarePointerComp(Pointer ptr, String name) {
 		String declaration = "";
-		declaration += ptr.getDataType().getName().toString();
+		if (ptr.getDataType() == null) {
+			declaration += "void";
+		}else {
+			declaration += ptr.getDataType().getName().toString();
+		}
 		declaration += " *" + name;
 		return declaration;
 	}
@@ -107,9 +111,16 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		} else if (ct instanceof Composite) {
 			declaration += fullName(ct);
 			declaration += " " + compName;
-		} else {
-			declaration += ct.getName();
-			declaration += " " + compName;
+		} else {		
+			
+			if (ct.getName().contentEquals("string")) {
+				declaration += "char";
+				declaration += " " + compName + "[" + comp.getLength() + "]";
+			} else {
+				declaration += ct.getName();
+				declaration += " " + compName;
+			}
+			
 		}
 		declaration += ";\n";
 		return declaration;
@@ -171,10 +182,16 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		res += "typedef int8_t bool;\n";
 		res += "typedef uint16_t word;\n";
 		res += "typedef uint16_t ushort;\n";
+		res += "typedef uint16_t undefined2;\n";
 		res += "typedef uint32_t uint;\n";
+		res += "typedef uint32_t undefined4;\n";
+		res += "typedef uint32_t ulong;\n";
 		res += "typedef uint32_t dword;\n";
+		res += "typedef uint64_t ulonglong;\n";
+		res += "typedef uint64_t undefined8;\n";
 
 		ArrayList<DataType> dataTypeList = getAllReferencedDataTypes(data_types);
+		while(dataTypeList.remove(null));
 		/*
 		 * Collections.sort(dataTypeList, new Comparator<DataType>() { public int
 		 * compare(DataType t1, DataType t2) { return

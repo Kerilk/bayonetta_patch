@@ -1,6 +1,6 @@
 
 //Iterate over user function that were named by the user. 
-//@category Iteration
+//@category Bayonetta
 
 import java.io.File;
 import java.util.*;
@@ -76,7 +76,7 @@ public class exportBayonettaFunctions extends GhidraScript {
 				// + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
 				// substring = substring.replace(function.getName()+"(", "(*" +
 				// function.getName() + ")(");
-				String substring = "" + function.getCallingConventionName() + "\n" + function.getReturnType() + "\n(*"
+				String substring = "static\n" + function.getCallingConventionName() + "\n" + function.getReturnType() + "\n(*"
 						+ function.getName() + ")(\n";
 				substring = print_parameters(substring, function);
 				substring += ") = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
