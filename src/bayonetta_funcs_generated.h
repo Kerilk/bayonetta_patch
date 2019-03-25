@@ -88,7 +88,7 @@ int
 (*bayoActor_allocInitAttachPoints)(
 	bayoActor_t * actor,
 	int numAttachPoints,
-	bayoInstance_t * * bayoInstance
+	bayoHeapBase_t * bayoInstance
 ) = (void *)0x00451B20;
 
 static
@@ -1026,22 +1026,8 @@ void
 
 static
 __thiscall
-void
-(*bayoHeapPool_destroy)(
-	bayoHeapPool_t * heap
-) = (void *)0x00C6EC30;
-
-static
-__thiscall
-void
-(*bayoHeapPool_reset)(
-	bayoHeapPool_t * pbParm1
-) = (void *)0x00C6ECE0;
-
-static
-__thiscall
 int
-(*bayoHeapUnique_create)(
+(*bayoHeapPool_create)(
 	bayoHeapPageAligned_t * this,
 	uint heapSize
 ) = (void *)0x00C6EAF0;
@@ -1049,7 +1035,7 @@ int
 static
 __thiscall
 int
-(*bayoHeapUnique_createWithAlignment)(
+(*bayoHeapPool_createWithAlignment)(
 	bayoHeapPool_t * heap,
 	uint size,
 	uint alignment
@@ -1058,7 +1044,7 @@ int
 static
 __thiscall
 void
-(*bayoHeapUnique_deleteAndFree)(
+(*bayoHeapPool_deleteAndFree)(
 	bayoHeapPool_t * pbParm1,
 	byte bParm2
 ) = (void *)0x00C6EC60;
@@ -1066,25 +1052,39 @@ void
 static
 __thiscall
 void
-(*bayoHeapUnique_delete_static)(
+(*bayoHeapPool_delete_static)(
 	bayoHeapPool_t * pbParm1
 ) = (void *)0x00C6EC00;
 
 static
 __thiscall
+void
+(*bayoHeapPool_destroy)(
+	bayoHeapPool_t * heap
+) = (void *)0x00C6EC30;
+
+static
+__thiscall
 bayoHeapPool_t *
-(*bayoHeapUnique_init)(
+(*bayoHeapPool_init)(
 	bayoHeapPool_t * heap
 ) = (void *)0x00C6EAD0;
 
 static
 __thiscall
 void
-(*bayoHeapUnique_initSize)(
+(*bayoHeapPool_initSize)(
 	bayoHeapPageAligned_t * heap,
 	int ignored,
 	int totalSize
 ) = (void *)0x00C6ECC0;
+
+static
+__thiscall
+void
+(*bayoHeapPool_reset)(
+	bayoHeapPool_t * pbParm1
+) = (void *)0x00C6ECE0;
 
 static
 __thiscall
@@ -1208,6 +1208,14 @@ void
 	bayoMesh_t * mesh,
 	int actorField_2B4
 ) = (void *)0x0049FF30;
+
+static
+__thiscall
+void
+(*bayoMesh_setUnknownSubstructFieldC)(
+	bayoMesh_t * iParm1,
+	int flag
+) = (void *)0x0049FE40;
 
 static
 __thiscall
@@ -2091,7 +2099,7 @@ float
 static
 __stdcall
 uint
-(*bayo_createMainFixedHeap)(
+(*bayo_createAssetPool)(
 	uint itemCount
 ) = (void *)0x00C5F500;
 
