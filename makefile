@@ -6,10 +6,13 @@ all:
 	python inject_code.py
 	python link.py
 
-patch: all
-	bsdiff Bayonetta.exe out/Bayonetta.exe out/Bayonetta.`cat VERSION`.diff
+bsdiff-v4.3-win-x64.zip:
 	wget https://github.com/cnSchwarzer/bsdiff-win/releases/download/v4.3/bsdiff-v4.3-win-x64.zip
-	mv bsdiff-v4.3-win-x64.zip out/bayo_patch.`cat VERSION`.zip
+	touch $@
+
+patch: all bsdiff-v4.3-win-x64.zip
+	bsdiff Bayonetta.exe out/Bayonetta.exe out/Bayonetta.`cat VERSION`.diff
+	cp bsdiff-v4.3-win-x64.zip out/bayo_patch.`cat VERSION`.zip
 	echo "IF EXIST Bayonetta.bak (" > out/bayo_batch.bat
 	echo "  bspatch.exe Bayonetta.bak Bayonetta.exe Bayonetta.`cat VERSION`.diff" >> out/bayo_batch.bat
 	echo ") ELSE (" >> out/bayo_batch.bat
@@ -24,4 +27,3 @@ clean:
 	rm -f out/*.diff
 	rm -f out/*.zip
 	rm -f out/*.bat
-	rm -f bsdiff-v4.3-win-x64.zip
