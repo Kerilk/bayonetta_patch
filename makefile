@@ -20,7 +20,8 @@ patch: all
 
 clean:
 	$(MAKE) -C src clean
-	rm out/Bayonetta.exe
-	rm out/*.diff
-	rm out/*.zip
-	rm out/*.bat
+	rm -f out/Bayonetta.exe
+	rm -f out/*.diff
+	rm -f out/*.zip
+	rm -f out/*.bat
+	rm -f bsdiff-v4.3-win-x64.zip
