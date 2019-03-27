@@ -21,3 +21,6 @@ patch: all
 clean:
 	$(MAKE) -C src clean
 	rm out/Bayonetta.exe
+	rm out/*.diff
+	rm out/*.zip
+	rm out/*.bat
