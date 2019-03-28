@@ -15,6 +15,6 @@ cp out/Bayonetta.exe "PATH_TO_BAYONETTA.exe"
 ```
 
 ## install from archive
-Extract in the Bayonetta install directory and run the batfile bayo\_patch.bat file.
+Extract in the Bayonetta install directory and run the bayo\_patch.bat file.
 
 Thanks https://github.com/cnSchwarzer/bsdiff-win/ for porting the bsdiff tool to windows.
