@@ -83,6 +83,15 @@ vector4_t *
 ) = (void *)0x00C8560A;
 
 static
+__stdcall
+vector3_t *
+(*D3DXVec3TransformNormal)(
+	vector3_t * pOut,
+	vector3_t * pV,
+	matrix4x4_t * pM
+) = (void *)0x00C855CE;
+
+static
 __thiscall
 int
 (*bayoActor_allocInitAttachPoints)(
@@ -2126,7 +2135,7 @@ static
 __thiscall
 int
 (*bayoSemaphore_create)(
-	void * * pSemaphore,
+	bayoSemaphore_t * semaphore,
 	uint initialCount,
 	uint maximumCount
 ) = (void *)0x00C7B290;
@@ -2191,6 +2200,20 @@ void
 	bayoShaders_t * shaders,
 	void * shaderFile
 ) = (void *)0x00C5B320;
+
+static
+__thiscall
+void
+(*bayoSteamCallbacks_delete)(
+	bayoSteamCallbacks_t * steamCallbacks
+) = (void *)0x00C80070;
+
+static
+__thiscall
+undefined4 *
+(*bayoSteamCallbacks_init)(
+	bayoSteamCallbacks_t * puParm1
+) = (void *)0x00C80230;
 
 static
 __thiscall
@@ -2335,6 +2358,13 @@ void
 (*bayoUndef_initUnknownFloatList)(
 	bayoUnknownFloatList_t * unknownFloatList
 ) = (void *)0x004BBBE0;
+
+static
+__cdecl
+void
+(*bayoUnknownDataIndexStruct_init)(
+	bayoUnknownDataIndexStruct * param_1
+) = (void *)0x00C71DF0;
 
 static
 __thiscall
@@ -2963,6 +2993,14 @@ void *
 
 static
 __stdcall
+int *
+(*bayo_getChapterEventInfo)(
+	int chapterId,
+	int eventId
+) = (void *)0x004E6820;
+
+static
+__stdcall
 bayoCpkCriDirectoryEntry_t *
 (*bayo_getCpkEntryForFile)(
 	char * path
@@ -3174,6 +3212,24 @@ uint
 static
 __cdecl
 void
+(*bayo_initKeyboard)(
+void) = (void *)0x00C761C0;
+
+static
+__cdecl
+void
+(*bayo_initMotionTable)(
+void) = (void *)0x00D8B250;
+
+static
+__cdecl
+int
+(*bayo_initMouse)(
+void) = (void *)0x00C75800;
+
+static
+__cdecl
+void
 (*bayo_initStructArray)(
 	void * pArray,
 	uint structSize,
@@ -3193,13 +3249,6 @@ undefined
 (*bayo_initThreadEnv)(
 	uint numThreads
 ) = (void *)0x00C62B00;
-
-static
-__cdecl
-void
-(*bayo_init_struct_05bb1b04_t)(
-	struct_05bb1b04_t * param_1
-) = (void *)0x00C71DF0;
 
 static
 __cdecl

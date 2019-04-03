@@ -76,6 +76,8 @@ typedef struct struct_Int5_t struct_Int5_t;
 
 typedef struct bayoShortcutTableItem_t bayoShortcutTableItem_t;
 
+typedef struct bayoSteamCallback_t bayoSteamCallback_t;
+
 typedef struct bayoDirectoryDescriptor_t bayoDirectoryDescriptor_t;
 
 typedef struct bayoOption_t bayoOption_t;
@@ -91,6 +93,8 @@ typedef struct bayoExp_t bayoExp_t;
 typedef struct bayoMotionInfosSubstruct_t bayoMotionInfosSubstruct_t;
 
 typedef struct bayoSoundDirectoryEntry_t bayoSoundDirectoryEntry_t;
+
+typedef struct struct_00eb7bb0_substruct_t struct_00eb7bb0_substruct_t;
 
 typedef struct bayoWindItem_t bayoWindItem_t;
 
@@ -144,9 +148,13 @@ typedef struct clpHeader_t clpHeader_t;
 
 typedef struct bayoCloth_t bayoCloth_t;
 
+typedef struct exceptionPrologStructure_t exceptionPrologStructure_t;
+
 typedef struct wmbBatchHeader_t wmbBatchHeader_t;
 
 typedef struct bayoSteamStruct_t bayoSteamStruct_t;
+
+typedef struct struct_00e84728_t struct_00e84728_t;
 
 typedef struct bayoPerformance_t bayoPerformance_t;
 
@@ -168,7 +176,13 @@ typedef struct bayoHitItem_t bayoHitItem_t;
 
 typedef struct bayoHeapVectorIndex_t bayoHeapVectorIndex_t;
 
+typedef struct flgHeader_t flgHeader_t;
+
 typedef struct bayoShortShortInt_t bayoShortShortInt_t;
+
+typedef struct flgMeshUnknownSubstructFlags_t flgMeshUnknownSubstructFlags_t;
+
+typedef struct struct_00eb7bb0_t struct_00eb7bb0_t;
 
 typedef struct struct_05beb940_substruct_t struct_05beb940_substruct_t;
 
@@ -186,9 +200,13 @@ typedef struct struct_00ee7650_substruct_t struct_00ee7650_substruct_t;
 
 typedef struct bayoIntPtrPtr_t bayoIntPtrPtr_t;
 
+typedef struct struct_00f47ab8_substruct_t struct_00f47ab8_substruct_t;
+
 typedef struct bayoRoom_t bayoRoom_t;
 
 typedef struct wmbMeshHeader_t wmbMeshHeader_t;
+
+typedef struct struct_00d9d928_t struct_00d9d928_t;
 
 typedef struct expEntryBoneTrackInfo_t expEntryBoneTrackInfo_t;
 
@@ -202,7 +220,11 @@ typedef struct bayoScene_t bayoScene_t;
 
 typedef struct motKey3_t motKey3_t;
 
+typedef struct bayoPtrInt_t bayoPtrInt_t;
+
 typedef struct bayoSoundDirectory_t bayoSoundDirectory_t;
+
+typedef struct struct_00f20ab0_t struct_00f20ab0_t;
 
 typedef struct bayoCamera_t bayoCamera_t;
 
@@ -214,13 +236,21 @@ typedef struct bayoConfig_t bayoConfig_t;
 
 typedef struct bayoUnknownVectorsIndex_t bayoUnknownVectorsIndex_t;
 
+typedef struct struct_00eb6cf0_t struct_00eb6cf0_t;
+
 typedef struct clpItem_t clpItem_t;
 
 typedef struct seqHeader_t seqHeader_t;
 
+typedef struct bayoSuffixNumber_t bayoSuffixNumber_t;
+
+typedef struct bayoSteamCallbacks_t bayoSteamCallbacks_t;
+
 typedef struct bayoDisplayModeInformation_t bayoDisplayModeInformation_t;
 
 typedef struct bayoBlendAnimDescriptor_t bayoBlendAnimDescriptor_t;
+
+typedef struct bayoCurlTimezone_t bayoCurlTimezone_t;
 
 typedef struct motValues4_t motValues4_t;
 
@@ -240,21 +270,33 @@ typedef struct bayoStringInt_t bayoStringInt_t;
 
 typedef struct bayoChapterEventVector_t bayoChapterEventVector_t;
 
+typedef struct bayoUnknownDataIndexStruct bayoUnknownDataIndexStruct;
+
 typedef struct struct_05be7ce8_t struct_05be7ce8_t;
 
 typedef struct clwItem_t clwItem_t;
 
 typedef struct bayoCpkCriDirectoryEntry_t bayoCpkCriDirectoryEntry_t;
 
+typedef struct bayoAlfheimLimitations_t bayoAlfheimLimitations_t;
+
 typedef struct clhItem_t clhItem_t;
 
+typedef struct flgMeshUnknownFlags_t flgMeshUnknownFlags_t;
+
+typedef struct struct_00eb02c8_t struct_00eb02c8_t;
+
 typedef struct bayoMaterialVectorTable_t bayoMaterialVectorTable_t;
+
+typedef struct bayoIntPtrInt_t bayoIntPtrInt_t;
 
 typedef struct bayoFindFileData_t bayoFindFileData_t;
 
 typedef struct bayoFindFile_t bayoFindFile_t;
 
 typedef struct bayoDat_t bayoDat_t;
+
+typedef struct struct_00f1aa68_substruct_t struct_00f1aa68_substruct_t;
 
 typedef struct bayoFileVaultData_t bayoFileVaultData_t;
 
@@ -276,13 +318,17 @@ typedef struct bayoUnknownVectors_t bayoUnknownVectors_t;
 
 typedef struct bayoFileDescriptor_t bayoFileDescriptor_t;
 
+typedef struct struct_00e89a78_t struct_00e89a78_t;
+
 typedef struct bayoCharWcharTextStruct_t bayoCharWcharTextStruct_t;
+
+typedef struct struct_00e847c8_t struct_00e847c8_t;
 
 typedef struct bayoJobManager_t bayoJobManager_t;
 
 typedef struct bayoJobManagerItem_t bayoJobManagerItem_t;
 
-typedef struct struct_05bb1b04_t struct_05bb1b04_t;
+typedef struct struct_00f1a9a8_substruct_t struct_00f1a9a8_substruct_t;
 
 typedef struct bayoPool_t bayoPool_t;
 
@@ -300,13 +346,7 @@ typedef struct bayoHeapSub_funcs_t bayoHeapSub_funcs_t;
 
 typedef struct bayoViewport_t bayoViewport_t;
 
-typedef struct bayoHeapVariableItem_t bayoHeapVariableItem_t;
-
-typedef struct bayoHeapVariableHead_t bayoHeapVariableHead_t;
-
-typedef struct bayoHeapVariable_t bayoHeapVariable_t;
-
-typedef struct bayoHeapVariable_funcs_t bayoHeapVariable_funcs_t;
+typedef struct struct_00ea9838_t struct_00ea9838_t;
 
 typedef struct motKey4_t motKey4_t;
 
@@ -338,9 +378,13 @@ typedef struct bayoObject_t bayoObject_t;
 
 typedef struct seqEffectTrack_t seqEffectTrack_t;
 
+typedef struct struct_00e86900_t struct_00e86900_t;
+
 typedef struct bayoAssetBuffer_t bayoAssetBuffer_t;
 
 typedef struct bayoGalleryEntry_t bayoGalleryEntry_t;
+
+typedef struct bayoChapterEventData_t bayoChapterEventData_t;
 
 typedef union motRecorOffVal_t motRecorOffVal_t;
 
@@ -400,6 +444,8 @@ typedef struct bayoAttachPoint_t bayoAttachPoint_t;
 
 typedef struct bayoClothItem_t bayoClothItem_t;
 
+typedef struct struct_00e8b450_t struct_00e8b450_t;
+
 typedef struct bayoHeapFixedItem_t bayoHeapFixedItem_t;
 
 typedef struct bayoHeapFixed_funcs_t bayoHeapFixed_funcs_t;
@@ -410,7 +456,19 @@ typedef struct bayoHeapVector_t bayoHeapVector_t;
 
 typedef struct datHeader_t datHeader_t;
 
+typedef struct struct_00ed0ab8_t struct_00ed0ab8_t;
+
 typedef struct motKey5_t motKey5_t;
+
+typedef struct bayoHeapVariableItem_t bayoHeapVariableItem_t;
+
+typedef struct bayoHeapVariableHead_t bayoHeapVariableHead_t;
+
+typedef struct bayoHeapVariable_funcs_t bayoHeapVariable_funcs_t;
+
+typedef struct bayoHeapVariable_t bayoHeapVariable_t;
+
+typedef struct struct_00e7f380_substruct_t struct_00e7f380_substruct_t;
 
 typedef struct bayoHeapPageAlignedItem_t bayoHeapPageAlignedItem_t;
 
@@ -462,10 +520,6 @@ void * bayoInitUnknownFields_func_t(void * unknownFields);
 
 typedef
 __thiscall
-int bayoHeapVariable_create_func_t(bayoHeapVariable_t * heap, uint heapSize, bayoHeapPageAligned_t * sourceHeap);
-
-typedef
-__thiscall
 void bayoActor_func_8_t(bayoActor_t * , int );
 
 typedef
@@ -503,6 +557,10 @@ int bayoMaterial_func_0_t(int * this);
 typedef
 __thiscall
 int bayoHeapFixed_create_func_t(bayoHeapFixed_t * heap, uint itemSize, uint itemCount, uint alignment, bayoHeapBase_t * allocHeap);
+
+typedef
+__thiscall
+int bayoHeapVariable_create_func_t(bayoHeapVariable_t * heap, uint heapSize, bayoHeapPageAligned_t * sourceHeap);
 
 typedef
 __thiscall
@@ -604,6 +662,14 @@ struct bayoShortcutTableItem_t {
 	char *action;
 };
 
+struct bayoSteamCallback_t {
+	void *pFuncTable;
+	uint field_0x4;
+	uint field_0x8;
+	bayoSteamCallbacks_t *pCallbacks;
+	void *pFunc;
+};
+
 struct bayoDirectoryDescriptor_t {
 	char *path;
 	bayoDirectoryDescriptor_t *nextDirectory;
@@ -697,6 +763,12 @@ struct bayoSoundDirectoryEntry_t {
 	char *name;
 	bayoSoundEntry_t *soundEntries;
 	int entryCount;
+};
+
+struct struct_00eb7bb0_substruct_t {
+	int field_0x0;
+	int field_0x4;
+	float field_0x8;
 };
 
 struct bayoWindItem_t {
@@ -2096,6 +2168,16 @@ struct bayoCloth_t {
 	undefined field_0xd1f;
 };
 
+struct exceptionPrologStructure_t {
+	int field_0x0;
+	int field_0x4;
+	int field_0x8;
+	int field_0xc;
+	int field_0x10;
+	void *field_0x14;
+	void *field_0x18;
+};
+
 struct wmbBatchHeader_t {
 	ushort batchIdx;
 	ushort id;
@@ -2142,6 +2224,15 @@ struct bayoSteamStruct_t {
 	ISteamHTMLSurface htmlSurface;
 	ISteamInventory inventory;
 	ISteamVideo video;
+};
+
+struct struct_00e84728_t {
+	short field_0x0;
+	byte field_0x2;
+	byte field_0x3;
+	short field_0x4;
+	byte field_0x6;
+	byte field_0x7;
 };
 
 struct bayoPerformance_t {
@@ -73248,10 +73339,33 @@ struct bayoHeapVectorIndex_t {
 	bayoHeapVector_t *pVectors;
 };
 
+struct flgHeader_t {
+	uint id;
+	uint meshUnknownSubstructFlagsCount;
+	uint meshUnknownSubstructFlagsOffset;
+	uint meshUnknownFlagsCount;
+	uint meshUnknownFlagsOffset;
+	uint meshUnknownSubstructFieldCCount;
+	uint meshUnknownSubstructFieldCOffset;
+	uint reserved[9];
+};
+
 struct bayoShortShortInt_t {
 	short field_0x0;
 	short field_0x2;
 	int field_0x4;
+};
+
+struct flgMeshUnknownSubstructFlags_t {
+	uint meshIndex;
+	uint mask;
+	uint flags;
+};
+
+struct struct_00eb7bb0_t {
+	int field_0x0;
+	void *field_0x4;
+	struct_00eb7bb0_substruct_t field_0x8[8];
 };
 
 struct struct_05beb940_substruct_t {
@@ -73553,6 +73667,13 @@ struct bayoIntPtrPtr_t {
 	void *field_0x8;
 };
 
+struct struct_00f47ab8_substruct_t {
+	void *field_0x0;
+	int field_0x4;
+	uint field_0x8;
+	uint field_0xc;
+};
+
 struct bayoRoom_t {
 	int number;
 	int otherNumber;
@@ -73575,6 +73696,12 @@ struct wmbMeshHeader_t {
 	dword field_1C;
 	char name[32];
 	struct wmbMeshBoundingBox_t boundingBox;
+};
+
+struct struct_00d9d928_t {
+	void *ptrFunc;
+	int entryCount;
+	void *pEntryList;
 };
 
 struct expEntryBoneTrackInfo_t {
@@ -73613,8 +73740,24 @@ struct motKey3_t {
 	ushort cp;
 };
 
+struct bayoPtrInt_t {
+	void *field_0x0;
+	int field_0x4;
+};
+
 struct bayoSoundDirectory_t {
 	bayoSoundDirectoryEntry_t entries[116];
+};
+
+struct struct_00f20ab0_t {
+	int field_0x0;
+	float field_0x4;
+	float field_0x8;
+	float field_0xc;
+	float field_0x10;
+	float field_0x14;
+	float field_0x18;
+	float field_0x1c;
 };
 
 struct bayoCamera_t {
@@ -78399,6 +78542,12 @@ struct bayoUnknownVectorsIndex_t {
 	bayoUnknownVectors_t *pVectors;
 };
 
+struct struct_00eb6cf0_t {
+	char *field_0x0;
+	int field_0x4;
+	int field_0x8;
+};
+
 struct clpItem_t {
 	short no;
 	short noUp;
@@ -78421,6 +78570,24 @@ struct seqHeader_t {
 	uint effectTrackEffect;
 	uint flagsTrackCount;
 	uint flagsTrackOffset;
+};
+
+struct bayoSuffixNumber_t {
+	char *suffix;
+	int value;
+	int field_0x8;
+	int field_0xc;
+};
+
+struct bayoSteamCallbacks_t {
+	struct bayoSteamCallback_t field_0x0;
+	struct bayoSteamCallback_t field_0x14;
+	struct bayoSteamCallback_t field_0x28;
+	uint field_0x3c;
+	uint field_0x40;
+	uint field_0x44;
+	uint field_0x48;
+	void *pFuncTable;
 };
 
 struct bayoDisplayModeInformation_t {
@@ -78447,6 +78614,11 @@ struct bayoBlendAnimDescriptor_t {
 	dword field_C;
 	dword field_10;
 	bayoRecordKeyCacheItem_t *cachedKeys;
+};
+
+struct bayoCurlTimezone_t {
+	char name[8];
+	int offset;
 };
 
 struct motValues4_t {
@@ -78516,8 +78688,20 @@ struct bayoStringInt_t {
 struct bayoChapterEventVector_t {
 	int chapterId;
 	bayo_events_func_t *eventsFunc;
-	void *field_0x8;
+	void *pEventsData;
 	bayo_events_func_t *eventsCleanup;
+};
+
+struct bayoUnknownDataIndexStruct {
+	char name[16];
+	void *field_0x10;
+	uint size;
+	uint field_0x18;
+	int field_0x1c;
+	undefined field_0x20;
+	undefined field_0x21;
+	undefined field_0x22;
+	undefined field_0x23;
 };
 
 struct struct_05be7ce8_t {
@@ -78672,6 +78856,12 @@ struct bayoCpkCriDirectoryEntry_t {
 	uint field_0x10;
 };
 
+struct bayoAlfheimLimitations_t {
+	int id;
+	int flags;
+	char *description;
+};
+
 struct clhItem_t {
 	short p1;
 	short p2;
@@ -78681,8 +78871,25 @@ struct clhItem_t {
 	struct vector3_t offset2;
 };
 
+struct flgMeshUnknownFlags_t {
+	uint meshIndex;
+	uint value;
+};
+
+struct struct_00eb02c8_t {
+	int field_0x0;
+	short field_0x4;
+	short field_0x6;
+};
+
 struct bayoMaterialVectorTable_t {
 	bayoMaterialVectorTableItem_t * vectors[190];
+};
+
+struct bayoIntPtrInt_t {
+	int field_0x0;
+	void *field_0x4;
+	int field_0x8;
 };
 
 struct bayoFindFileData_t {
@@ -78707,6 +78914,18 @@ struct bayoFindFile_t {
 
 struct bayoDat_t {
 	void *datHandle;
+};
+
+struct struct_00f1aa68_substruct_t {
+	int field_0x0;
+	int field_0x4;
+	void *field_0x8;
+	short field_0xc;
+	short field_0xe;
+	int field_0x10;
+	void *field_0x14;
+	int field_0x18;
+	int field_0x1c;
 };
 
 struct bayoFileVaultData_t {
@@ -78795,6 +79014,13 @@ struct bayoFileDescriptor_t {
 	uint size;
 };
 
+struct struct_00e89a78_t {
+	int field_0x0;
+	int field_0x4;
+	short field_0x8;
+	short field_0xa;
+};
+
 struct bayoCharWcharTextStruct_t {
 	int field_0x0;
 	wchar_t wText[128];
@@ -78806,6 +79032,22 @@ struct bayoCharWcharTextStruct_t {
 	undefined field_0x139;
 	undefined field_0x13a;
 	undefined field_0x13b;
+};
+
+struct struct_00e847c8_t {
+	int field_0x0;
+	int field_0x4;
+	int field_0x8;
+	int field_0xc;
+	int field_0x10;
+	int field_0x14;
+	int field_0x18;
+	int field_0x1c;
+	int field_0x20;
+	int field_0x24;
+	int field_0x28;
+	int field_0x2c;
+	int field_0x30;
 };
 
 struct bayoJobManager_t {
@@ -78829,43 +79071,16 @@ struct bayoJobManagerItem_t {
 	void *taskParams;
 };
 
-struct struct_05bb1b04_t {
-	undefined field_0x0;
-	undefined field_0x1;
-	undefined field_0x2;
-	undefined field_0x3;
-	undefined field_0x4;
-	undefined field_0x5;
-	undefined field_0x6;
-	undefined field_0x7;
-	undefined field_0x8;
-	undefined field_0x9;
-	undefined field_0xa;
-	undefined field_0xb;
-	undefined field_0xc;
-	undefined field_0xd;
-	undefined field_0xe;
-	undefined field_0xf;
-	undefined field_0x10;
-	undefined field_0x11;
-	undefined field_0x12;
-	undefined field_0x13;
-	undefined field_0x14;
-	undefined field_0x15;
-	undefined field_0x16;
-	undefined field_0x17;
-	undefined field_0x18;
-	undefined field_0x19;
-	undefined field_0x1a;
-	undefined field_0x1b;
-	undefined field_0x1c;
-	undefined field_0x1d;
-	undefined field_0x1e;
-	undefined field_0x1f;
-	undefined field_0x20;
-	undefined field_0x21;
-	undefined field_0x22;
-	undefined field_0x23;
+struct struct_00f1a9a8_substruct_t {
+	void *field_0x0;
+	int field_0x4;
+	int field_0x8;
+	short field_0xc;
+	short field_0xe;
+	int field_0x10;
+	void *field_0x14;
+	int field_0x18;
+	int field_0x1c;
 };
 
 struct bayoPool_t {
@@ -78920,36 +79135,13 @@ struct bayoViewport_t {
 	float maxZ;
 };
 
-struct bayoHeapVariableItem_t {
-	bayoHeapVariableItem_t *previous;
-	bayoHeapVariableItem_t *next;
-	uint remainingSize;
-	uint size;
-	bayoHeapVariable_t *heap;
-};
-
-struct bayoHeapVariableHead_t {
-	bayoHeapVariableItem_t *previous;
-	bayoHeapVariableItem_t *next;
-	uint remainingSize;
-	uint size;
-};
-
-struct bayoHeapVariable_t {
-	bayoHeapVariable_funcs_t *funcs;
-	struct bayoCriticalSection_t criticalSection;
-	int field_0x20;
-	bayoHeapBase_t *nextHeap;
-	int field_0x28;
-	bayoHeapVariableHead_t *head;
-	bayoHeapVariableItem_t *lastItem;
-	uint totalSize;
-	int remainingSize;
-};
-
-struct bayoHeapVariable_funcs_t {
-	struct bayoHeap_funcs_t baseFuncs;
-	bayoHeapVariable_create_func_t *create;
+struct struct_00ea9838_t {
+	short field_0x0;
+	byte field_0x2;
+	byte field_0x3;
+	int field_0x4;
+	int field_0x8;
+	int field_0xc;
 };
 
 struct motKey4_t {
@@ -79271,6 +79463,84 @@ struct bayoObject_t {
 struct seqEffectTrack_t {
 };
 
+struct struct_00e86900_t {
+	int field_0x0;
+	int field_0x4;
+	int field_0x8;
+	undefined field_0xc;
+	undefined field_0xd;
+	undefined field_0xe;
+	undefined field_0xf;
+	undefined field_0x10;
+	undefined field_0x11;
+	undefined field_0x12;
+	undefined field_0x13;
+	undefined field_0x14;
+	undefined field_0x15;
+	undefined field_0x16;
+	undefined field_0x17;
+	undefined field_0x18;
+	undefined field_0x19;
+	undefined field_0x1a;
+	undefined field_0x1b;
+	undefined field_0x1c;
+	undefined field_0x1d;
+	undefined field_0x1e;
+	undefined field_0x1f;
+	undefined field_0x20;
+	undefined field_0x21;
+	undefined field_0x22;
+	undefined field_0x23;
+	undefined field_0x24;
+	undefined field_0x25;
+	undefined field_0x26;
+	undefined field_0x27;
+	undefined field_0x28;
+	undefined field_0x29;
+	undefined field_0x2a;
+	undefined field_0x2b;
+	undefined field_0x2c;
+	undefined field_0x2d;
+	undefined field_0x2e;
+	undefined field_0x2f;
+	undefined field_0x30;
+	undefined field_0x31;
+	undefined field_0x32;
+	undefined field_0x33;
+	undefined field_0x34;
+	undefined field_0x35;
+	undefined field_0x36;
+	undefined field_0x37;
+	undefined field_0x38;
+	undefined field_0x39;
+	undefined field_0x3a;
+	undefined field_0x3b;
+	undefined field_0x3c;
+	undefined field_0x3d;
+	undefined field_0x3e;
+	undefined field_0x3f;
+	undefined field_0x40;
+	undefined field_0x41;
+	undefined field_0x42;
+	undefined field_0x43;
+	undefined field_0x44;
+	undefined field_0x45;
+	undefined field_0x46;
+	undefined field_0x47;
+	undefined field_0x48;
+	undefined field_0x49;
+	undefined field_0x4a;
+	undefined field_0x4b;
+	undefined field_0x4c;
+	undefined field_0x4d;
+	undefined field_0x4e;
+	undefined field_0x4f;
+	undefined field_0x50;
+	undefined field_0x51;
+	undefined field_0x52;
+	undefined field_0x53;
+};
+
 struct bayoAssetBuffer_t {
 	void *assetHandle;
 	uint assetSize;
@@ -79281,6 +79551,15 @@ struct bayoGalleryEntry_t {
 	int id;
 	int field_0x4;
 	char name[64];
+};
+
+struct bayoChapterEventData_t {
+	int eventId;
+	int chapterId;
+	int verseId;
+	struct vector3_t position;
+	struct vector3_t orientation;
+	int flags;
 };
 
 union motRecorOffVal_t {
@@ -79699,6 +79978,14 @@ struct bayoClothItem_t {
 	dword field_DC;
 };
 
+struct struct_00e8b450_t {
+	uint field_0x0;
+	byte field_0x4;
+	byte field_0x5;
+	byte field_0x6;
+	byte field_0x7;
+};
+
 struct bayoHeapFixedItem_t {
 	bayoHeapFixedItem_t *previous;
 	bayoHeapFixedItem_t *next;
@@ -79735,8 +80022,56 @@ struct datHeader_t {
 	uint fileSizesOffset;
 };
 
+struct struct_00ed0ab8_t {
+	char *name;
+	uint nameLength;
+	int id;
+};
+
 struct motKey5_t {
 	uchar cp;
+};
+
+struct bayoHeapVariableItem_t {
+	bayoHeapVariableItem_t *previous;
+	bayoHeapVariableItem_t *next;
+	uint remainingSize;
+	uint size;
+	bayoHeapVariable_t *heap;
+};
+
+struct bayoHeapVariableHead_t {
+	bayoHeapVariableItem_t *previous;
+	bayoHeapVariableItem_t *next;
+	uint remainingSize;
+	uint size;
+};
+
+struct bayoHeapVariable_funcs_t {
+	struct bayoHeap_funcs_t baseFuncs;
+	bayoHeapVariable_create_func_t *create;
+};
+
+struct bayoHeapVariable_t {
+	bayoHeapVariable_funcs_t *funcs;
+	struct bayoCriticalSection_t criticalSection;
+	int field_0x20;
+	bayoHeapBase_t *nextHeap;
+	int field_0x28;
+	bayoHeapVariableHead_t *head;
+	bayoHeapVariableItem_t *lastItem;
+	uint totalSize;
+	int remainingSize;
+};
+
+struct struct_00e7f380_substruct_t {
+	int field_0x0;
+	int field_0x4;
+	bayoHeapVariable_t *heap;
+	int field_0xc;
+	int field_0x10;
+	int field_0x14;
+	int field_0x18;
 };
 
 struct bayoHeapPageAlignedItem_t {
