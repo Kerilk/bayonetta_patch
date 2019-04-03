@@ -10,27 +10,25 @@ int32_t
 bayoActor_loadATT(struct bayoActor_t *actor, void *attHandle) {
     int32_t numAttachPoints;
     struct bayoAttachPoint_t *pAttachPoints;
-    int32_t res;
     int32_t i;
 
-    res = 0;
-    if(attHandle && *(int32_t *)attHandle > 0) {
-        numAttachPoints = *(int32_t *)attHandle;
-        pAttachPoints = (struct bayoAttachPoint_t *)
-                ((int32_t *)attHandle + 1);
+    if(!attHandle || *(int32_t *)attHandle <= 0)
+        return 0;
 
-        bayoActor_allocInitAttachPoints(actor,
-                                     numAttachPoints,
-                                     pBayoHeap3);
-        for(i = 0; i < numAttachPoints; i++) {
-            bayoActor_attachBone(actor,
-                                 pAttachPoints[i].sourceBoneIndex,
-                                 pAttachPoints[i].targetBoneIndex,
-                                 pAttachPoints[i].option);
-        }
-        res = 1;
+    numAttachPoints = *(int32_t *)attHandle;
+    pAttachPoints = (struct bayoAttachPoint_t *)
+            ((int32_t *)attHandle + 1);
+
+    bayoActor_allocInitAttachPoints(actor,
+                                    numAttachPoints,
+                                    pBayoHeap3);
+    for(i = 0; i < numAttachPoints; i++) {
+        bayoActor_attachBone(actor,
+                             pAttachPoints[i].sourceBoneIndex,
+                             pAttachPoints[i].targetBoneIndex,
+                             pAttachPoints[i].option);
     }
-    return res;
+    return 1;
 }
 
 extern
@@ -38,7 +36,7 @@ __thiscall
 __attribute__((noinline))
 int32_t
 bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
-    int32_t i;
+    uint32_t i;
     struct flgHeader_t *header;
     struct bayoMesh_t *mesh;
     struct flgMeshUnknownSubstructFlags_t *ussflgs;
