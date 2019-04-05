@@ -92,6 +92,17 @@ vector3_t *
 ) = (void *)0x00C855CE;
 
 static
+__stdcall
+HRESULT
+(*DirectInput8Create)(
+	HINSTANCE hinst,
+	DWORD dwVersion,
+	IID * riidltf,
+	LPVOID * ppvOut,
+	LPUNKNOWN punkOuter
+) = (void *)0x00C85682;
+
+static
 __thiscall
 int
 (*bayoActor_allocInitAttachPoints)(
@@ -637,6 +648,40 @@ undefined4
 
 static
 __cdecl
+void *
+(*bayoCriAllocator_00f49510_alloc)(
+	bayoCriAllocator_t * allocator,
+	uint size
+) = (void *)0x00C6CE60;
+
+static
+__cdecl
+void
+(*bayoCriAllocator_00f49510_free)(
+	bayoCriAllocator_t * allocator,
+	void * param_2
+) = (void *)0x00C6CE30;
+
+static
+__cdecl
+void
+(*bayoCriAllocator_updateAlloc)(
+	bayoCriAllocator_t * allocator,
+	__cdecl void * (*)(bayoCriAllocator_t * allocator, uint ),
+	int flag
+) = (void *)0x00CC5FDF;
+
+static
+__cdecl
+undefined
+(*bayoCriAllocator_updateFree)(
+	bayoCriAllocator_t * allocator,
+	__cdecl void (*)(bayoCriAllocator_t * allocator, void * memory),
+	int flag
+) = (void *)0x00CC6008;
+
+static
+__cdecl
 int
 (*bayoCriData_create)(
 	uint size,
@@ -783,6 +828,24 @@ void
 	bayoDisplayModes_t * displayModes,
 	uint displayModeCount
 ) = (void *)0x00C55CB0;
+
+static
+__thiscall
+int
+(*bayoDoubleBuffers_allocate)(
+	bayoDoubleBuffers_t * pStru,
+	uint heapSize,
+	int vertexBufferSize,
+	int indexCount,
+	bayoHeapBase_t * sourceHeap
+) = (void *)0x00C61F80;
+
+static
+__thiscall
+void
+(*bayoDoubleBuffers_swap)(
+	bayoDoubleBuffers_t * pStru
+) = (void *)0x00C61E10;
 
 static
 __thiscall
@@ -1034,6 +1097,58 @@ void
 (*bayoFindFile_reset2)(
 	bayoFindFile_t * iParm1
 ) = (void *)0x00C82250;
+
+static
+__thiscall
+int
+(*bayoFixedIndexBuffer_allocate)(
+	bayoFixedIndexBuffer_t * fIBuff,
+	int indexSize,
+	int indexCount
+) = (void *)0x00C7AAB0;
+
+static
+__thiscall
+void
+(*bayoFixedIndexBuffer_delete)(
+	bayoFixedIndexBuffer_t * fIBuff
+) = (void *)0x00C7AA30;
+
+static
+__thiscall
+void
+(*bayoFixedIndexBuffer_discardData)(
+	bayoFixedIndexBuffer_t * fIBuff
+) = (void *)0x00C7A950;
+
+static
+__thiscall
+int
+(*bayoFixedVertexBuffer_allocate)(
+	bayoFixedVertexBuffer_t * fVBuff,
+	int size
+) = (void *)0x00C660E0;
+
+static
+__thiscall
+void
+(*bayoFixedVertexBuffer_clearSource)(
+	bayoFixedVertexBuffer_t * fVBuff
+) = (void *)0x00C65F20;
+
+static
+__thiscall
+void
+(*bayoFixedVertexBuffer_delete)(
+	bayoFixedVertexBuffer_t * fVBuff
+) = (void *)0x00C66060;
+
+static
+__thiscall
+void
+(*bayoFixedVertexBuffer_discardData)(
+	bayoFixedVertexBuffer_t * fVBuff
+) = (void *)0x00C65F80;
 
 static
 __thiscall
@@ -2097,6 +2212,13 @@ int
 static
 __thiscall
 void
+(*bayoSamplersTex_init)(
+	bayoSamplersTex_t * samplersTex
+) = (void *)0x00C66360;
+
+static
+__thiscall
+void
 (*bayoSamplers_delete)(
 	bayoSamplers_t * this
 ) = (void *)0x00C5B970;
@@ -2654,6 +2776,12 @@ void
 static
 __cdecl
 void
+(*bayo_OTGManager_reset)(
+void) = (void *)0x004E2C60;
+
+static
+__cdecl
+void
 (*bayo_addAssetFileNameToRegister)(
 	char * path
 ) = (void *)0x00C7A0F0;
@@ -2667,17 +2795,10 @@ undefined
 
 static
 __cdecl
-uint
-(*bayo_addToGraphicMemoryUsage)(
-	uint size
-) = (void *)0x00C5DE60;
-
-static
-__cdecl
 void *
 (*bayo_allocAligned)(
 	uint size,
-	bayoHeapPageAligned_t * pBayoHeap
+	bayoHeapBase_t * pBayoHeap
 ) = (void *)0x00C53BF0;
 
 static
@@ -2696,11 +2817,27 @@ bayoTex_t *
 ) = (void *)0x00C6DED0;
 
 static
+__stdcall
+int
+(*bayo_alloc_05bea8e0_structs)(
+	uint structCount,
+	bayoHeapBase_t * heap
+) = (void *)0x00C7BDA0;
+
+static
 __cdecl
 D3DDISPLAYMODE *
 (*bayo_allocateDisplayModeArray)(
 	uint displayModeCount
 ) = (void *)0x00C55530;
+
+static
+__cdecl
+int
+(*bayo_allocate_struct_05a7af18)(
+	struct_05a7af18_t * pStru,
+	int count1
+) = (void *)0x004E2AA0;
 
 static
 __cdecl
@@ -2719,6 +2856,12 @@ void
 	float expValue,
 	expRecord_t * expRecord
 ) = (void *)0x00435A70;
+
+static
+__stdcall
+void
+(*bayo_bayoCriticalSection_t_05bea908_init)(
+void) = (void *)0x00C7C2B0;
 
 static
 __cdecl
@@ -2822,6 +2965,15 @@ void *
 static
 __cdecl
 void
+(*bayo_criAllocator_00f49510_init)(
+	__cdecl void * (*)(bayoCriAllocator_t * allocator, uint ),
+	__cdecl void (*)(bayoCriAllocator_t * allocator, void * memory),
+	int flag
+) = (void *)0x00CDA090;
+
+static
+__cdecl
+void
 (*bayo_criFreeFromBayoHeap)(
 	void * param_1,
 	void * memory
@@ -2837,9 +2989,16 @@ int
 
 static
 __cdecl
+int
+(*bayo_criManaLibrary_init)(
+	bayoHeapSub_t * heap
+) = (void *)0x00C6CE80;
+
+static
+__cdecl
 void
 (*bayo_criRegisterAlloc)(
-	__cdecl void * (*)(void * , uint ),
+	__cdecl void * (*)(bayoCriAllocator_t * allocator, uint ),
 	void * data
 ) = (void *)0x00CD02EB;
 
@@ -2847,7 +3006,7 @@ static
 __cdecl
 void
 (*bayo_criRegisterFree)(
-	__cdecl void (*)(void * , void * memory),
+	__cdecl void (*)(bayoCriAllocator_t * allocator, void * memory),
 	void * data
 ) = (void *)0x00CD0319;
 
@@ -2912,6 +3071,12 @@ __stdcall
 void
 (*bayo_delete_05bcd6b0)(
 void) = (void *)0x00D99550;
+
+static
+__cdecl
+void
+(*bayo_destroyStartupScreen)(
+void) = (void *)0x00C7B730;
 
 static
 __cdecl
@@ -3048,6 +3213,14 @@ int
 
 static
 __cdecl
+void
+(*bayo_getKeyNAme)(
+	int keyCode,
+	char * pName
+) = (void *)0x00C75F00;
+
+static
+__cdecl
 bayoMaterialVectorTableItem_t *
 (*bayo_getMaterialFuncs)(
 	wmbMaterial_t * material
@@ -3160,9 +3333,29 @@ void) = (void *)0x00C56700;
 
 static
 __cdecl
+HINSTANCE
+(*bayo_getWindowInstanceHandle)(
+void) = (void *)0x00C565E0;
+
+static
+__cdecl
 uint
 (*bayo_getWindowWidth)(
 void) = (void *)0x00C566F0;
+
+static
+__cdecl
+uint
+(*bayo_graphicMemoryUsageDec)(
+	uint size
+) = (void *)0x00C5DE50;
+
+static
+__cdecl
+uint
+(*bayo_graphicMemoryUsageInc)(
+	uint size
+) = (void *)0x00C5DE60;
 
 static
 __stdcall
@@ -3184,9 +3377,23 @@ void) = (void *)0x00C194E0;
 
 static
 __cdecl
+undefined4
+(*bayo_initControls)(
+void) = (void *)0x0048FA50;
+
+static
+__cdecl
 int
 (*bayo_initCriRelatedStructs)(
 void) = (void *)0x00C7A300;
+
+static
+__cdecl
+int
+(*bayo_initCriVideo)(
+	uint structCount,
+	bayoHeapSub_t * heap
+) = (void *)0x00C70360;
 
 static
 __cdecl
@@ -3204,6 +3411,12 @@ void) = (void *)0x00C54010;
 
 static
 __cdecl
+int
+(*bayo_initDoubleBuffers)(
+void) = (void *)0x004F93F0;
+
+static
+__cdecl
 uint
 (*bayo_initFileSystem)(
 	char * dataDirPath
@@ -3211,9 +3424,15 @@ uint
 
 static
 __cdecl
-void
+int
 (*bayo_initKeyboard)(
 void) = (void *)0x00C761C0;
+
+static
+__cdecl
+int
+(*bayo_initKeyboardWrapper)(
+void) = (void *)0x00C76360;
 
 static
 __cdecl
@@ -3226,6 +3445,12 @@ __cdecl
 int
 (*bayo_initMouse)(
 void) = (void *)0x00C75800;
+
+static
+__cdecl
+uint
+(*bayo_initMouseWrapper)(
+void) = (void *)0x00C758B0;
 
 static
 __cdecl
@@ -3686,9 +3911,138 @@ void
 static
 __thiscall
 void
+(*bayo_struct_05a7ae78_delete)(
+	struct_05a7ae78_t * puParm1
+) = (void *)0x00C70D30;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7ae78_init)(
+	struct_05a7ae78_t * pStru
+) = (void *)0x00C70770;
+
+static
+__thiscall
+int
+(*bayo_struct_05a7af18_allocate)(
+	struct_05a7af18_t * pStru,
+	int count1,
+	int count2,
+	struct_05a7ae78_t * pStru2,
+	bayoHeapSub_t * heap,
+	bayoJobManager_t * jobManager
+) = (void *)0x00C70B10;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7af18_cleanup)(
+	struct_05a7af18_t * iParm1
+) = (void *)0x00C70670;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7af18_init)(
+	struct_05a7af18_t * puParm1
+) = (void *)0x00C70AA0;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7af18_swap)(
+	struct_05a7af18_t * iParm1
+) = (void *)0x00C70C40;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7af18_swap2)(
+	struct_05a7af18_t * iParm1
+) = (void *)0x00C70C90;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7e538_allocate)(
+	struct_05a7e538_t * iParm1
+) = (void *)0x004E5610;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7e538_cleanup)(
+	struct_05a7e538_t * iParm1
+) = (void *)0x004E5580;
+
+static
+__thiscall
+void
+(*bayo_struct_05a7e538_reset)(
+	struct_05a7e538_t * iParm1
+) = (void *)0x004E55A0;
+
+static
+__thiscall
+void
 (*bayo_struct_05ac79c0_init)(
 	struct_05ac79c0_t * stru
 ) = (void *)0x00C6CDA0;
+
+static
+__cdecl
+void
+(*bayo_struct_05ace0f4_init)(
+void) = (void *)0x00523310;
+
+static
+__thiscall
+struct_05bea8e0_t *
+(*bayo_struct_05bea8e0_init)(
+	struct_05bea8e0_t * pStru
+) = (void *)0x00C7EF20;
+
+static
+__thiscall
+int
+(*bayo_struct_05bea8e0_substruct_1_init)(
+	struct_05bea8e0_substruct_1_t * pStru
+) = (void *)0x00C82650;
+
+static
+__thiscall
+void
+(*bayo_struct_05bea8e0_substruct_2_init)(
+	struct_05bea8e0_substruct_2_t * puParm1
+) = (void *)0x00C823D0;
+
+static
+__thiscall
+void
+(*bayo_struct_05bea8e0_substruct_2_init2)(
+	struct_05bea8e0_substruct_2_t * puParm1
+) = (void *)0x00C82380;
+
+static
+__thiscall
+void
+(*bayo_struct_05bea8e0_substruct_3_init)(
+	struct_05bea8e0_substruct_3_t * puParm1
+) = (void *)0x00C82350;
+
+static
+__thiscall
+void
+(*bayo_struct_05bea8e0_substruct_3_init2)(
+	struct_05bea8e0_substruct_3_t * puParm1
+) = (void *)0x00C822F0;
+
+static
+__cdecl
+void
+(*bayo_swapDoubleBuffers)(
+void) = (void *)0x004F9460;
 
 static
 __cdecl
@@ -3703,6 +4057,12 @@ void *
 (*bayo_threadLauncher)(
 	bayoThread_t * param_1
 ) = (void *)0x00C63300;
+
+static
+__stdcall
+void
+(*bayo_waitStartupWindowClosed)(
+void) = (void *)0x00C7B330;
 
 static
 __thiscall
@@ -3778,6 +4138,20 @@ uint
 
 static
 __cdecl
+void
+(*initStruct_05a490d0)(
+	struct_05a490d0_t * param_1
+) = (void *)0x00C77D10;
+
+static
+__cdecl
+void
+(*initStruct_05a49188)(
+	struct_05a49188_t * param_1
+) = (void *)0x00C767E0;
+
+static
+__cdecl
 undefined
 (*initStruct_05bb9588)(
 	struct_05bb9588_t * param_1
@@ -3796,6 +4170,12 @@ __cdecl
 int
 (*initWindowAgain)(
 void) = (void *)0x00C55FB0;
+
+static
+__cdecl
+int
+(*init_controller)(
+void) = (void *)0x00C77870;
 
 static
 __cdecl

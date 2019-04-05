@@ -5,7 +5,7 @@
 #define __cdecl __attribute__((cdecl))
 #define __stdcall __attribute__((stdcall))
 
-#include <inttypes.h>
+#include "windows_vs12_32.h"
 #include "bayonetta_generated.h"
 #include "bayonetta_funcs_generated.h"
 
