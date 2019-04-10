@@ -40,6 +40,8 @@ public class exportBayonettaFunctions extends GhidraScript {
 					} else {
 						temp.add("\t" + p.getDataType() + " " + p.getName());
 					}
+				} else if (p.getDataType() instanceof TypeDef) {
+					temp.add("\t" + p.getDataType().getName() + " " + p.getName());
 				} else {
 					temp.add("\t" + p.getDataType() + " " + p.getName());
 				}
@@ -76,8 +78,14 @@ public class exportBayonettaFunctions extends GhidraScript {
 				// + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
 				// substring = substring.replace(function.getName()+"(", "(*" +
 				// function.getName() + ")(");
-				String substring = "static\n" + function.getCallingConventionName() + "\n" + function.getReturnType() + "\n(*"
-						+ function.getName() + ")(\n";
+				String substring = "static\n" + function.getCallingConventionName() + "\n";
+				if (function.getReturnType() instanceof TypeDef) {
+					substring += function.getReturnType().getName();
+				} else {
+					substring += function.getReturnType();
+				}
+
+				substring += "\n(*" + function.getName() + ")(\n";
 				substring = print_parameters(substring, function);
 				substring += ") = (void *)0x" + function.getEntryPoint().toString().toUpperCase() + ";\n\n";
 				String[] tuple = { function.getName(), substring };

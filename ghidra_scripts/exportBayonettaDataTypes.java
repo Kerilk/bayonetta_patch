@@ -6,10 +6,12 @@
 //@menupath 
 //@toolbar 
 
+import ghidra.app.plugin.core.datamgr.archive.SourceArchive;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.util.*;
 import ghidra.program.model.reloc.*;
 import ghidra.program.model.data.*;
+import ghidra.program.model.data.Enum;
 import ghidra.program.model.block.*;
 import ghidra.program.model.symbol.*;
 import ghidra.program.model.scalar.*;
@@ -50,7 +52,7 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		}
 	}
 
-	private ArrayList<DataType> getAllReferencedDataTypes(DataType[] dataTypeList) {
+	private ArrayList<DataType> getAllReferencedDataTypes(List<DataType> dataTypeList) {
 		ArrayList<DataType> allDataTypes = new ArrayList<DataType>();
 
 		for (DataType d : dataTypeList) {
@@ -76,9 +78,17 @@ public class exportBayonettaDataTypes extends GhidraScript {
 
 	private String declareArrayComp(Array arr, String name) {
 		String declaration = "";
-		declaration += arr.getDataType().getName();
+		String dimension = "";
+		dimension += "[" + arr.getNumElements() + "]";
+		DataType d = arr.getDataType();
+		while (d instanceof Array) {
+			Array arr2 = (Array) d;
+			dimension += "[" + arr2.getNumElements() + "]";
+			d = arr2.getDataType();
+		}
+		declaration += d.getName();
 		declaration += " " + name;
-		declaration += "[" + arr.getNumElements() + "]";
+		declaration += dimension;
 		return declaration;
 	}
 
@@ -86,7 +96,7 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		String declaration = "";
 		if (ptr.getDataType() == null) {
 			declaration += "void";
-		}else {
+		} else {
 			declaration += ptr.getDataType().getName().toString();
 		}
 		declaration += " *" + name;
@@ -111,8 +121,8 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		} else if (ct instanceof Composite) {
 			declaration += fullName(ct);
 			declaration += " " + compName;
-		} else {		
-			
+		} else {
+
 			if (ct.getName().contentEquals("string")) {
 				declaration += "char";
 				declaration += " " + compName + "[" + comp.getLength() + "]";
@@ -120,7 +130,7 @@ public class exportBayonettaDataTypes extends GhidraScript {
 				declaration += ct.getName();
 				declaration += " " + compName;
 			}
-			
+
 		}
 		declaration += ";\n";
 		return declaration;
@@ -168,30 +178,75 @@ public class exportBayonettaDataTypes extends GhidraScript {
 	public void run() throws Exception {
 		Program p = getCurrentProgram();
 		DataTypeManager dtm = p.getDataTypeManager();
-		CategoryPath path = new CategoryPath("/bayonetta.h");
-		Category bayonetta_cat = dtm.getCategory(path);
-		DataType[] data_types = bayonetta_cat.getDataTypes();
+		CategoryPath bayoPath = new CategoryPath("/bayonetta.h");
+		CategoryPath d3d9Path = new CategoryPath("/d3d9.h");
+		Category bayonetta_cat = dtm.getCategory(bayoPath);
+		Category d3d9_category = dtm.getCategory(d3d9Path);
+		DataType[] data_types_arr = bayonetta_cat.getDataTypes();
 
-		File file = askFile("target file", "Select");
-		java.io.FileWriter fw = new java.io.FileWriter(file, false);
+		List<DataType> data_types = new ArrayList<DataType>();
+
+		for (DataType d : data_types_arr) {
+			data_types.add(d);
+		}
+		data_types_arr = d3d9_category.getDataTypes();
+		for (DataType d : data_types_arr) {
+			data_types.add(d);
+		}
+		Function function = getFirstFunction();
+		while (true) {
+
+			if (monitor.isCancelled()) {
+				break;
+			}
+
+			if (function == null) {
+				break;
+			}
+			if (function.getSignatureSource() == SourceType.USER_DEFINED && !function.getName().startsWith("j_")
+					&& !function.getName().startsWith("nullsub") && !function.getName().startsWith("FUN_")
+					&& (!function.isThunk() || function.getThunkedFunction(false).isExternal())
+					&& function.getEntryPoint().getOffset() < 0x05DB8000) {
+				data_types.add(function.getReturnType());
+				Parameter[] parameters = function.getParameters();
+				for (Parameter param : parameters) {
+					data_types.add(param.getDataType());
+				}
+			}
+			function = getFunctionAfter(function);
+		}
+
+		SourceArchive winArchive = dtm.getSourceArchives().get(0);
+		List<DataType> win_data_types = dtm.getDataTypes(winArchive);
 
 		String res = "";
 		res += "typedef uint8_t undefined;\n";
 		res += "typedef uint8_t uchar;\n";
-		res += "typedef int8_t byte;\n";
-		res += "typedef int8_t bool;\n";
 		res += "typedef uint16_t word;\n";
 		res += "typedef uint16_t ushort;\n";
 		res += "typedef uint16_t undefined2;\n";
 		res += "typedef uint32_t uint;\n";
 		res += "typedef uint32_t undefined4;\n";
-		res += "typedef uint32_t ulong;\n";
 		res += "typedef uint32_t dword;\n";
 		res += "typedef uint64_t ulonglong;\n";
 		res += "typedef uint64_t undefined8;\n";
 
 		ArrayList<DataType> dataTypeList = getAllReferencedDataTypes(data_types);
-		while(dataTypeList.remove(null));
+		List<DataType> toRemove = new ArrayList<DataType>();
+		while (dataTypeList.remove(null))
+			;
+		for (DataType d : dataTypeList) {
+			if (win_data_types.contains(d)) {
+				toRemove.add(d);
+			}
+		}
+		for (DataType d : toRemove) {
+			while (dataTypeList.remove(d))
+				;
+		}
+
+		File file = askFile("target file", "Select");
+		java.io.FileWriter fw = new java.io.FileWriter(file, false);
 		/*
 		 * Collections.sort(dataTypeList, new Comparator<DataType>() { public int
 		 * compare(DataType t1, DataType t2) { return
@@ -200,17 +255,34 @@ public class exportBayonettaDataTypes extends GhidraScript {
 		// Collections.reverse(dataTypeList);
 		dataTypeList = orderElements(dataTypeList);
 		for (DataType d : dataTypeList) {
+			if (d instanceof Composite) {
+				String substring = "" + fullName(d) + ";\n";
+				substring += "typedef " + fullName(d) + " " + d.getName() + ";\n\n";
+				res += substring;
+			}
+		}
+		for (DataType d : dataTypeList) {
+			if (d instanceof Enum) {
+				long[] vals = ((Enum) d).getValues();
+				String substring = "typedef enum {\n";
+				for (long v : vals) {
+					substring += "\t" + ((Enum) d).getName(v) + "\t = " + v + ",\n";
+				}
+				substring += "} " + d.toString() + ";\n\n";
+				res += substring;
+			}
+		}
+		for (DataType d : dataTypeList) {
 			if (d instanceof TypeDef) {
 				String substring = "typedef " + ((TypeDef) d).getDataType().getName() + " " + d.getName() + ";\n\n";
 				res += substring;
 			}
 		}
-		for (DataType d : dataTypeList) {
-			if (d instanceof Composite) {
-				String substring = "typedef " + fullName(d) + " " + d.getName() + ";\n\n";
-				res += substring;
-			}
-		}
+		/*
+		 * for (DataType d : dataTypeList) { if (d instanceof Composite) { String
+		 * substring = "typedef " + fullName(d) + " " + d.getName() + ";\n\n"; res +=
+		 * substring; } }
+		 */
 		for (DataType d : dataTypeList) {
 			if (d instanceof FunctionDefinition) {
 				FunctionDefinition fd = (FunctionDefinition) d;
@@ -232,7 +304,6 @@ public class exportBayonettaDataTypes extends GhidraScript {
 
 		fw.write(res);
 		fw.close();
-		// println(res);
 	}
 
 }
