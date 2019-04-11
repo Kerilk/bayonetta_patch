@@ -10,7 +10,8 @@
 extern
 __thiscall
 int32_t
-bayo_load_pl0031_pl0031_new(struct bayoActor_t *actor) {
+bayo_load_pl0031_pl0031_new(struct bayoActorGarment_t *garment) {
+    bayoActor_t *actor = (bayoActor_t*)garment;
     void *wtbHandle;
     void *wmbHandle;
     void *attHandle;
@@ -27,23 +28,11 @@ bayo_load_pl0031_pl0031_new(struct bayoActor_t *actor) {
         return 0;
 
     wtbHandle = bayo_getAssetHandle(pl0031_pl0031texA_wtb);
-    bayoTextureCacheItem_loadWTBStatic(
-           (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
-               actor,
-               0x0C10),
-           wtbHandle);
+    bayoSamplers_loadWTBStatic(garment->samplers + 2, wtbHandle);
     wtbHandle = bayo_getAssetHandle(pl0031_pl0031texB_wtb);
-    bayoTextureCacheItem_loadWTBStatic(
-           (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
-               actor,
-               0x0C00),
-           wtbHandle);
+    bayoSamplers_loadWTBStatic(garment->samplers + 1, wtbHandle);
     wtbHandle = bayo_getAssetHandle(pl0031_pl0031texC_wtb);
-    bayoTextureCacheItem_loadWTBStatic(
-           (struct bayoTextureCacheItem_t *)MEMBER_ADDR_AT_OFFSET(
-               actor,
-               0x0BF0),
-           wtbHandle);
+    bayoSamplers_loadWTBStatic(garment->samplers, wtbHandle);
 
     attHandle = bayo_getAssetHandle("pl0031.dat\\pl0031.att");
     if( !bayoActor_loadATT(actor, attHandle) ) {
@@ -85,7 +74,8 @@ bayo_load_pl0031_pl0031_new(struct bayoActor_t *actor) {
     }
 
     actor->funcs->func3(actor, 0);
-    *(uint32_t *)MEMBER_ADDR_AT_OFFSET(actor, 0x6920) = 0;
+    garment->field_0x6920 = 2;
+
     return 1;
 }
 

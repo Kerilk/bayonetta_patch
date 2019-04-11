@@ -196,6 +196,14 @@ void
 static
 __thiscall
 void
+(*bayoActorGarment_deleteAndFree)(
+	bayoActorGarment_t * pvParm1,
+	byte bParm2
+) = (void *)0x004CE7B0;
+
+static
+__thiscall
+void
 (*bayoActorLargeSubstruct2_init)(
 	bayoActorLargeSubstruct2_t * puParm1
 ) = (void *)0x0045CCD0;
@@ -961,6 +969,13 @@ void
 (*bayoCloth_delete)(
 	bayoCloth_t * iParm1
 ) = (void *)0x00421790;
+
+static
+__thiscall
+int
+(*bayoCloth_init)(
+	bayoCloth_t * cloth
+) = (void *)0x0041F140;
 
 static
 __thiscall
@@ -2844,6 +2859,42 @@ void
 static
 __thiscall
 void *
+(*bayoObjectHeap_allocateObject)(
+	bayoObjectHeap_t * objectHeap,
+	uint obectId
+) = (void *)0x004BE7C0;
+
+static
+__thiscall
+bayoActorGarment_t *
+(*bayoObjectHeap_bayoActorGarment_init)(
+	bayoObjectHeap_t * objectHeap
+) = (void *)0x004C18B0;
+
+static
+__thiscall
+void
+(*bayoObjectHeap_cleanup)(
+	bayoObjectHeap_t * objectHeap
+) = (void *)0x00587BA0;
+
+static
+__thiscall
+void
+(*bayoObjectHeap_delete)(
+	bayoObjectHeap_t * objectHeap
+) = (void *)0x004BE810;
+
+static
+__thiscall
+bayoObjectHeap_t *
+(*bayoObjectHeap_init)(
+	bayoObjectHeap_t * objectHeap
+) = (void *)0x004BE870;
+
+static
+__thiscall
+void *
 (*bayoObject_cleanup)(
 	bayoObject_t * object
 ) = (void *)0x00C5BCA0;
@@ -2943,6 +2994,22 @@ void
 (*bayoSamplers_init)(
 	bayoSamplers_t * samplers
 ) = (void *)0x00C5B960;
+
+static
+__thiscall
+int
+(*bayoSamplers_loadWTBDynamic)(
+	bayoSamplers_t * samplers,
+	void * wtbHandle
+) = (void *)0x00C5BC20;
+
+static
+__thiscall
+int
+(*bayoSamplers_loadWTBStatic)(
+	bayoSamplers_t * samplers,
+	void * wtbHandle
+) = (void *)0x00C5BBE0;
 
 static
 __thiscall
@@ -3115,22 +3182,6 @@ bool
 ) = (void *)0x00C5BAA0;
 
 static
-__thiscall
-int
-(*bayoTextureCacheItem_loadWTBDynamic)(
-	bayoTextureCacheItem_t * textureCacheItem,
-	void * wtbHandle
-) = (void *)0x00C5BC20;
-
-static
-__thiscall
-undefined
-(*bayoTextureCacheItem_loadWTBStatic)(
-	bayoTextureCacheItem_t * textureCacheItem,
-	void * wtbHandle
-) = (void *)0x00C5BBE0;
-
-static
 __cdecl
 void *
 (*bayoThread_create)(
@@ -3163,14 +3214,6 @@ void
 	bayoUndefConf_t * conf,
 	int difficulty
 ) = (void *)0x005018C0;
-
-static
-__thiscall
-void *
-(*bayoUndef_allocateObject)(
-	void * this,
-	uint obectId
-) = (void *)0x004BE7C0;
 
 static
 __thiscall
@@ -4613,7 +4656,7 @@ static
 __cdecl
 int
 (*bayo_loadWTB)(
-	bayoTextureCacheItem_t * textureCacheItem,
+	bayoSamplers_t * samplers,
 	void * wtbHandle,
 	int bDynamic
 ) = (void *)0x00C6E470;
@@ -4708,6 +4751,13 @@ int
 (*bayo_load_pl0030_pl0030)(
 	bayoPlayerModel_t * pPlayer
 ) = (void *)0x008C8680;
+
+static
+__thiscall
+int
+(*bayo_load_pl0031_pl0031)(
+	bayoActorGarment_t * pbParm1
+) = (void *)0x009FC890;
 
 static
 __thiscall
