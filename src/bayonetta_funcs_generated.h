@@ -104,6 +104,400 @@ HRESULT
 
 static
 __thiscall
+void
+(*bayoActorBase_UnknownMeshSubstructFlag0x10)(
+	bayoActorBase_t * iParm1,
+	int bSet
+) = (void *)0x004A5C00;
+
+static
+__thiscall
+void
+(*bayoActorBase_UnknownMeshSubstructFlag0x20)(
+	bayoActorBase_t * iParm1,
+	int bSet
+) = (void *)0x004A5C40;
+
+static
+__thiscall
+void
+(*bayoActorBase_applyEulerAngles)(
+	bayoActorBase_t * iParm1
+) = (void *)0x004A4BA0;
+
+static
+__thiscall
+void
+(*bayoActorBase_delete)(
+	bayoActorBase_t * puParm1
+) = (void *)0x004A4B70;
+
+static
+__thiscall
+bayoActorBase_t *
+(*bayoActorBase_deleteAndFree)(
+	bayoActorBase_t * pbParm1,
+	byte param_2
+) = (void *)0x004A6F20;
+
+static
+__thiscall
+bayoBone_t *
+(*bayoActorBase_getCenterBone)(
+	bayoActorBase_t * iParm1
+) = (void *)0x004A3AC0;
+
+static
+__thiscall
+bayoActorBase_t *
+(*bayoActorBase_init)(
+	bayoActorBase_t * bayoBase
+) = (void *)0x004A49C0;
+
+static
+__thiscall
+void
+(*bayoActorBase_setActorFlag0x4000000MeshesUnknownSubstructFlag0x40000)(
+	bayoActorBase_t * actor,
+	int bSet
+) = (void *)0x004A5F40;
+
+static
+__thiscall
+void
+(*bayoActorBase_setField0x278)(
+	bayoActorBase_t * iParm1,
+	uint param_2
+) = (void *)0x004A3B20;
+
+static
+__thiscall
+void
+(*bayoActorBase_setMeshesUnknownSubstructFields0x67And0x68)(
+	bayoActorBase_t * iParm1,
+	float param_2,
+	float param_3
+) = (void *)0x004A3AD0;
+
+static
+__thiscall
+void
+(*bayoActorBase_transformBonesIfNeeded)(
+	bayoActorBase_t * actor
+) = (void *)0x004A41C0;
+
+static
+__thiscall
+void
+(*bayoActorBase_unsetMeshesUnknownSubstructFlag0x1)(
+	bayoActorBase_t * iParm1
+) = (void *)0x004A4C10;
+
+static
+__thiscall
+void
+(*bayoActorLargeSubstruct2_init)(
+	bayoActorLargeSubstruct2_t * puParm1
+) = (void *)0x0045CCD0;
+
+static
+__thiscall
+bayoActorLargeSubstruct_t *
+(*bayoActorLargeSubstruct_init)(
+	bayoActorLargeSubstruct_t * puParm1
+) = (void *)0x004E19E0;
+
+static
+__thiscall
+bayoActorLarge_t *
+(*bayoActorLarge_deleteAndFree)(
+	bayoActorLarge_t * pbParm1,
+	byte bParm2
+) = (void *)0x004CF4E0;
+
+static
+__thiscall
+bayoActorLarge_t *
+(*bayoActorLarge_init)(
+	bayoActorLarge_t * puParm1
+) = (void *)0x00459120;
+
+static
+__thiscall
+bayoActorLastStructSubstructBaseSubstructSubstruct1_t *
+(*bayoActorLastStructSubstructBaseSubstructSubstruct1_init)(
+	bayoActorLastStructSubstructBaseSubstructSubstruct1_t * iParm1
+) = (void *)0x00C11690;
+
+static
+__thiscall
+bayoActorLastStructSubstructBaseSubstructSubstruct2_t *
+(*bayoActorLastStructSubstructBaseSubstructSubstruct2_init)(
+	bayoActorLastStructSubstructBaseSubstructSubstruct2_t * puParm1
+) = (void *)0x00C12010;
+
+static
+__thiscall
+vector4_t *
+(*bayoActorLastStructSubstructBaseSubstructSubstruct3_getVector1)(
+	bayoActorLastStructSubstructBaseSubstructSubstruct3_t * uParm1
+) = (void *)0x00C13150;
+
+static
+__thiscall
+bayoActorLastStructSubstructBaseSubstructSubstruct3_t *
+(*bayoActorLastStructSubstructBaseSubstructSubstruct3_init)(
+	bayoActorLastStructSubstructBaseSubstructSubstruct3_t * puParm1
+) = (void *)0x00C13280;
+
+static
+__thiscall
+bayoActorLastStructSubstructBaseSubstructSubstruct4_t *
+(*bayoActorLastStructSubstructBaseSubstructSubstruct4_init)(
+	bayoActorLastStructSubstructBaseSubstructSubstruct4_t * puParm1
+) = (void *)0x00AB4430;
+
+static
+__thiscall
+bayoActorLastStructSubstructBaseSubstruct_t *
+(*bayoActorLastStructSubstructBaseSubstruct_init)(
+	bayoActorLastStructSubstructBaseSubstruct_t * iParm1
+) = (void *)0x00C0C420;
+
+static
+__thiscall
+void
+(*bayoActorLastStructSubstructBase_delete)(
+	bayoActorLastStructSubstructBase_t * puParm1
+) = (void *)0x00AB9B40;
+
+static
+__thiscall
+void
+(*bayoActorLastStructSubstructBase_deleteAndFree)(
+	bayoActorLastStructSubstructBase_t * puParm1,
+	byte param_2
+) = (void *)0x00ABA4F0;
+
+static
+__thiscall
+bayoActorLastStructSubstructBase_t *
+(*bayoActorLastStructSubstructBase_init)(
+	bayoActorLastStructSubstructBase_t * puParm1
+) = (void *)0x00AB9C10;
+
+static
+__thiscall
+bayoActorLastStructSubstructType0x1_t *
+(*bayoActorLastStructSubstructType0x1_init)(
+	bayoActorLastStructSubstructType0x1_t * puParm1
+) = (void *)0x00ABA530;
+
+static
+__thiscall
+bayoActorLastStructSubstructType0x2_t *
+(*bayoActorLastStructSubstructType0x2_init)(
+	bayoActorLastStructSubstructType0x2_t * puParm1
+) = (void *)0x00ABB730;
+
+static
+__thiscall
+bayoActorLastStructSubstructType0x4_t *
+(*bayoActorLastStructSubstructType0x4_init)(
+	bayoActorLastStructSubstructType0x4_t * puParm1
+) = (void *)0x00ABB560;
+
+static
+__thiscall
+void
+(*bayoActorLastStructSubstructType0x8_deleteAndFree)(
+	bayoActorLastStructSubstructType0x8_t * pbParm1,
+	byte param_2
+) = (void *)0x00ABCA30;
+
+static
+__thiscall
+bayoActorLastStructSubstructType0x8_t *
+(*bayoActorLastStructSubstructType0x8_init)(
+	bayoActorLastStructSubstructType0x8_t * puParm1
+) = (void *)0x00ABC110;
+
+static
+__thiscall
+int
+(*bayoActorLastStructSubstructType0x8_unknownFunc1)(
+	bayoActorLastStructSubstructType0x8_t * iParm1,
+	bayoActor_t * param_2,
+	wmbLastUnknownStructItem_t * structItem,
+	bayoHeapBase_t * heap
+) = (void *)0x00ABC150;
+
+static
+__thiscall
+int
+(*bayoActorLastStruct_allocate)(
+	bayoActorLastStruct_t * actorLastStruct,
+	bayoActor_t * actor,
+	bayoHeapBase_t * heap
+) = (void *)0x0048F500;
+
+static
+__thiscall
+void
+(*bayoActorLastStruct_applyToMotion)(
+	bayoActorLastStruct_t * lastStruct
+) = (void *)0x0048F780;
+
+static
+__thiscall
+void
+(*bayoActorLastStruct_delete)(
+	bayoActorLastStruct_t * ppvParm1
+) = (void *)0x0048F460;
+
+static
+__thiscall
+bayoActorLastStruct_t *
+(*bayoActorLastStruct_init)(
+	bayoActorLastStruct_t * puParm1
+) = (void *)0x0048F450;
+
+static
+__thiscall
+void
+(*bayoActorMedium_computeCollisions)(
+	bayoActorMedium_t * actor
+) = (void *)0x004A53F0;
+
+static
+__thiscall
+bayoActorMedium_t *
+(*bayoActorMedium_deleteAndFree)(
+	bayoActorMedium_t * this,
+	byte param_2
+) = (void *)0x004BEA90;
+
+static
+__thiscall
+uint
+(*bayoActorMedium_getMediumFlag0x1)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004330B0;
+
+static
+__thiscall
+uint
+(*bayoActorMedium_getNotMediumFlag0x200)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433060;
+
+static
+__thiscall
+bayoActor_t *
+(*bayoActorMedium_init)(
+	bayoActorMedium_t * puParm1
+) = (void *)0x004BCE30;
+
+static
+__thiscall
+uint
+(*bayoActorMedium_load)(
+	bayoActorMedium_t * pbParm1
+) = (void *)0x004BDFF0;
+
+static
+__thiscall
+void
+(*bayoActorMedium_setActorFlag0x4000000MeshesUnknownSubstructFlag0x40000)(
+	bayoActorMedium_t * pbParm1
+) = (void *)0x004BD130;
+
+static
+__thiscall
+void
+(*bayoActorMedium_setMediumFlag0x1)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433090;
+
+static
+__thiscall
+void
+(*bayoActorMedium_setMediumFlag0x200)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433050;
+
+static
+__thiscall
+void
+(*bayoActorMedium_setMediumFlag0x400)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004330C0;
+
+static
+__thiscall
+void
+(*bayoActorMedium_setMediumFlag0x80)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433070;
+
+static
+__thiscall
+void
+(*bayoActorMedium_unsetActorFlag0x4000000MeshesUnknownSubstructFlag0x40000)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004BD140;
+
+static
+__thiscall
+void
+(*bayoActorMedium_unsetMediumFlag0x1)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004330A0;
+
+static
+__thiscall
+void
+(*bayoActorMedium_unsetMediumFlag0x200)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433040;
+
+static
+__thiscall
+void
+(*bayoActorMedium_unsetMediumFlag0x400)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004330D0;
+
+static
+__thiscall
+void
+(*bayoActorMedium_unsetMediumFlag0x80)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x00433080;
+
+static
+__thiscall
+void
+(*bayoActorMedium_updateWithBaseboneLocalPosition)(
+	bayoActorMedium_t * iParm1
+) = (void *)0x004BDFB0;
+
+static
+__thiscall
+void
+(*bayoActorSync_delete)(
+	bayoActorSync_t * puParm1
+) = (void *)0x00C61C20;
+
+static
+__thiscall
+bayoActorSync_t *
+(*bayoActorSync_init)(
+	bayoActorSync_t * puParm1
+) = (void *)0x00C61C00;
+
+static
+__thiscall
 int
 (*bayoActor_allocInitAttachPoints)(
 	bayoActor_t * actor,
@@ -140,6 +534,29 @@ void
 
 static
 __thiscall
+void
+(*bayoActor_decodeMotion)(
+	bayoActor_t * this,
+	bayoExp_t * param_2
+) = (void *)0x004DEA40;
+
+static
+__thiscall
+void
+(*bayoActor_delete)(
+	bayoActor_t * pActor
+) = (void *)0x00432F50;
+
+static
+__thiscall
+bayoActor_t *
+(*bayoActor_deleteAndFree)(
+	bayoActor_t * pbParm1,
+	byte bParm2
+) = (void *)0x004C0650;
+
+static
+__thiscall
 short *
 (*bayoActor_getBoneSymmetriesPtr)(
 	bayoActor_t * actor
@@ -170,6 +587,27 @@ bayoMesh_t *
 
 static
 __thiscall
+wmbLastUnknownStruct_t *
+(*bayoActor_getWMBLastUnknownStruct)(
+	bayoActor_t * iParm1
+) = (void *)0x004A38D0;
+
+static
+__thiscall
+bayoActor_t *
+(*bayoActor_init)(
+	bayoActor_t * puParm1
+) = (void *)0x004DEB50;
+
+static
+__thiscall
+int
+(*bayoActor_load)(
+	bayoActor_t * pbParm1
+) = (void *)0x004DE980;
+
+static
+__thiscall
 int
 (*bayoActor_loadAnimatedTextures)(
 	bayoActor_t * actor,
@@ -180,7 +618,7 @@ static
 __thiscall
 int
 (*bayoActor_loadMeshesAndBatches)(
-	bayoActor_t * actor,
+	bayoActorBase_t * actor,
 	bayoContext_t * context
 ) = (void *)0x004A3D70;
 
@@ -188,7 +626,7 @@ static
 __thiscall
 int
 (*bayoActor_loadSkeleton)(
-	bayoActor_t * actor,
+	bayoActorBase_t * actor,
 	bayoContext_t * context
 ) = (void *)0x004A6120;
 
@@ -214,7 +652,7 @@ static
 __thiscall
 int
 (*bayoActor_loadWMBAndWTBHelperWithParam)(
-	bayoActor_t * actor,
+	bayoActorBase_t * actor,
 	void * wmbHandle,
 	void * wtbHandle,
 	bayoContext_t * bayoContext
@@ -356,6 +794,21 @@ undefined4
 (*bayoAssetDescriptor_startLoading)(
 	bayoAssetDescriptor_t * assetDesc
 ) = (void *)0x00C7A720;
+
+static
+__thiscall
+bayoAtomicCounter_t *
+(*bayoAtomicCounter_deleteAndFree)(
+	bayoAtomicCounter_t * puParm1,
+	byte param_2
+) = (void *)0x00514120;
+
+static
+__thiscall
+bayoAtomicCounter_t *
+(*bayoAtomicCounter_init)(
+	bayoAtomicCounter_t * puParm1
+) = (void *)0x00513110;
 
 static
 __thiscall
@@ -501,6 +954,21 @@ int
 	clwItem_t * pClwItems,
 	int clwItemCount
 ) = (void *)0x004202E0;
+
+static
+__thiscall
+void
+(*bayoCloth_delete)(
+	bayoCloth_t * iParm1
+) = (void *)0x00421790;
+
+static
+__thiscall
+void
+(*bayoCollisionCache_hitActor)(
+	bayoCollisionCache_t * iParm1,
+	bayoActorBase_t * actor
+) = (void *)0x004982C0;
 
 static
 __cdecl
@@ -757,6 +1225,24 @@ int
 
 static
 __thiscall
+int
+(*bayoDat_findFileIndexByExtension)(
+	bayoDat_t * datFile,
+	char * extension,
+	uint index
+) = (void *)0x00C5B3B0;
+
+static
+__thiscall
+void *
+(*bayoDat_findFileWithExtension)(
+	bayoDat_t * piParm1,
+	char * extension,
+	uint index
+) = (void *)0x00C5B560;
+
+static
+__thiscall
 ulonglong
 (*bayoDierctoryDescriptor_getTotalSize)(
 	bayoDirectoryDescriptor_t * direDesc
@@ -850,6 +1336,51 @@ void
 static
 __thiscall
 void
+(*bayoEffectCacheBase_delete)(
+	bayoEffectCache_t * iParm1
+) = (void *)0x0059FE10;
+
+static
+__thiscall
+bayoEffectCache_t *
+(*bayoEffectCacheBase_init)(
+	bayoEffectCache_t * puParm1
+) = (void *)0x0059FD20;
+
+static
+__thiscall
+void
+(*bayoEffectCacheSubstruct1_delete)(
+	bayoEffectCacheSubstruct1_t * this
+) = (void *)0x00C660A0;
+
+static
+__thiscall
+bayoEffectCacheSubstruct1_t *
+(*bayoEffectCacheSubstruct1_init)(
+	bayoEffectCacheSubstruct1_t * puParm1
+) = (void *)0x00C65F10;
+
+static
+__thiscall
+bayoEffectCacheSubstruct2_t *
+(*bayoEffectCacheSubstruct2_init)(
+	bayoEffectCacheSubstruct2_t * pbParm1
+) = (void *)0x0059FF20;
+
+static
+__thiscall
+void
+(*bayoEffectCache_bindLibrary)(
+	bayoEffectCache_t * iParm1,
+	uint param_2,
+	char * effectLibName,
+	void * effHandle
+) = (void *)0x0059B370;
+
+static
+__thiscall
+void
 (*bayoExp_applyEffectToSkeleton)(
 	bayoExp_t * bayoExp
 ) = (void *)0x004367D0;
@@ -873,6 +1404,13 @@ float
 
 static
 __thiscall
+void
+(*bayoExp_delete)(
+	bayoExp_t * this
+) = (void *)0x00435A40;
+
+static
+__thiscall
 float
 (*bayoExp_getEntryValue)(
 	bayoExp_t * bayoExp,
@@ -887,6 +1425,13 @@ int
 	float * value,
 	expEntry_t * pEntry
 ) = (void *)0x00436460;
+
+static
+__thiscall
+bayoExp_t *
+(*bayoExp_init)(
+	bayoExp_t * puParm1
+) = (void *)0x00435A30;
 
 static
 __thiscall
@@ -1203,6 +1748,15 @@ uint
 (*bayoHeapFixed_bInited)(
 	bayoHeapFixed_t * heap
 ) = (void *)0x00C62760;
+
+static
+__thiscall
+int
+(*bayoHeapFixed_checkSizeAndCount)(
+	bayoHeapFixed_t * heap,
+	uint itemSize,
+	uint itemCount
+) = (void *)0x00C62700;
 
 static
 __thiscall
@@ -1771,6 +2325,21 @@ void
 
 static
 __thiscall
+void
+(*bayoHitVector_copy)(
+	bayoHitVector_t * puParm1,
+	bayoHitVector_t * param_2
+) = (void *)0x00C5C880;
+
+static
+__thiscall
+bayoHitVector_t *
+(*bayoHitVector_init)(
+	bayoHitVector_t * uParm1
+) = (void *)0x00C5C2D0;
+
+static
+__thiscall
 bayoJobManagerItem_t *
 (*bayoJobManagerItem_init)(
 	bayoJobManagerItem_t * item
@@ -1814,6 +2383,24 @@ bayoMeshGeometryTable_t *
 static
 __thiscall
 void
+(*bayoMeshSelector_setDefault)(
+	bayoMeshSelector_t * meshSelector,
+	int version
+) = (void *)0x004A1DD0;
+
+static
+__thiscall
+void
+(*bayoMeshSelector_setVersion)(
+	bayoMeshSelector_t * meshSelector,
+	bayoActor_t * actor,
+	uint meshVersion,
+	uint meshNumber
+) = (void *)0x004A1D80;
+
+static
+__thiscall
+void
 (*bayoMesh_associateAnimatedTextureCacheItem)(
 	bayoMesh_t * mesh,
 	bayoTextureCacheItem_t * textureCacheItem
@@ -1843,12 +2430,27 @@ vector3_t *
 
 static
 __thiscall
+bayoMesh_t *
+(*bayoMesh_getNextMesh)(
+	bayoMesh_t * iParm1
+) = (void *)0x0049FBB0;
+
+static
+__thiscall
 int
 (*bayoMesh_init)(
 	bayoMesh_t * pMesh,
 	bayoWmb_t * wmb,
 	int meshIndex
 ) = (void *)0x004A1200;
+
+static
+__thiscall
+void
+(*bayoMesh_setField0x7c)(
+	bayoMesh_t * iParm1,
+	int value
+) = (void *)0x0049FF50;
 
 static
 __thiscall
@@ -1876,11 +2478,50 @@ void
 
 static
 __thiscall
+void
+(*bayoMesh_setUnknownSubstructFields0x64And0x68)(
+	bayoMesh_t * iParm1,
+	float param_2,
+	float param_3
+) = (void *)0x0049FE60;
+
+static
+__thiscall
 int
 (*bayoMesh_setupBatchMaterials)(
 	bayoMesh_t * mesh,
 	bayoSamplers_t * meshSamplers
 ) = (void *)0x004A08C0;
+
+static
+__thiscall
+bayoMotionInfosSubstruct_t *
+(*bayoMotionInfosSubstruct_init)(
+	bayoMotionInfosSubstruct_t * puParm1
+) = (void *)0x00594110;
+
+static
+__thiscall
+void
+(*bayoMotionInfosSubstruct_initIfNeeded)(
+	bayoMotionInfosSubstruct_t * pbParm1
+) = (void *)0x00594C20;
+
+static
+__thiscall
+void
+(*bayoMotionInfos_addBaseToRootBoneTransform)(
+	bayoMotionInfos_t * motInfos,
+	float translateRatio,
+	float rotateRatio
+) = (void *)0x004AA370;
+
+static
+__thiscall
+int
+(*bayoMotionInfos_allocate)(
+	bayoMotionInfos_t * pbParm1
+) = (void *)0x004AAFD0;
 
 static
 __thiscall
@@ -1997,6 +2638,20 @@ void
 static
 __thiscall
 void
+(*bayoMotionInfos_delete)(
+	bayoMotionInfos_t * iParm1
+) = (void *)0x004AE830;
+
+static
+__thiscall
+void
+(*bayoMotionInfos_deleteCachedKeys)(
+	bayoMotionInfos_t * iParm1
+) = (void *)0x004AD710;
+
+static
+__thiscall
+void
 (*bayoMotionInfos_getBlendedParentBoneMotion)(
 	bayoMotionInfos_t * motionInfos,
 	bayoBlendAnimDescriptor_t * blendDescriptor,
@@ -2103,6 +2758,13 @@ int
 
 static
 __thiscall
+int
+(*bayoMotionInfos_init)(
+	bayoMotionInfos_t * iParm1
+) = (void *)0x004BE8E0;
+
+static
+__thiscall
 void
 (*bayoMotionInfos_initTransforms)(
 	bayoMotionInfos_t * motionInfos
@@ -2144,6 +2806,13 @@ int
 	motRecord_t * pMotRecords,
 	int mirror_x
 ) = (void *)0x004A9F40;
+
+static
+__thiscall
+void
+(*bayoMotionInfos_reset)(
+	bayoMotionInfos_t * pbParm1
+) = (void *)0x004AAF80;
 
 static
 __thiscall
@@ -2190,6 +2859,28 @@ uint
 static
 __thiscall
 void
+(*bayoPlayerModel_delete)(
+	bayoPlayerModel_t * pbParm1
+) = (void *)0x004CE640;
+
+static
+__thiscall
+int
+(*bayoPlayerModel_load)(
+	bayoPlayerModel_t * pPlayer,
+	int modelNumber
+) = (void *)0x008C60D0;
+
+static
+__thiscall
+void
+(*bayoPlayerModel_setSelectorsAndFlags)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C5FA0;
+
+static
+__thiscall
+void
 (*bayoPool_destroy)(
 	bayoPool_t * pool
 ) = (void *)0x00C26450;
@@ -2208,6 +2899,13 @@ int
 	bayoSamplers_t * * nativeSampler,
 	uint * pSamplerID
 ) = (void *)0x00D52390;
+
+static
+__thiscall
+void
+(*bayoSamplersTex_delete)(
+	bayoSamplersTex_t * puParm1
+) = (void *)0x00C66390;
 
 static
 __thiscall
@@ -2292,6 +2990,13 @@ void
 
 static
 __thiscall
+bayoSeq_t *
+(*bayoSeqStruct_init)(
+	bayoSeq_t * puParm1
+) = (void *)0x004BC270;
+
+static
+__thiscall
 void
 (*bayoSeq_init)(
 	bayoSeq_t * seq,
@@ -2336,6 +3041,13 @@ undefined4 *
 (*bayoSteamCallbacks_init)(
 	bayoSteamCallbacks_t * puParm1
 ) = (void *)0x00C80230;
+
+static
+__thiscall
+uint
+(*bayoStreamData_getVertexCount)(
+	bayoStreamData_t * streamData
+) = (void *)0x00C5F8D0;
 
 static
 __thiscall
@@ -2490,6 +3202,13 @@ void
 
 static
 __thiscall
+bayoUnknownFloatList_t *
+(*bayoUnknownFloatList_init)(
+	bayoUnknownFloatList_t * puParm1
+) = (void *)0x004BBBB0;
+
+static
+__thiscall
 void
 (*bayoUnknownMeshSubstruct_init)(
 	bayoUnknownMeshSubstruct_t * unknownMeshSubstruct
@@ -2509,6 +3228,17 @@ int
 (*bayoVector3_zero)(
 	vector3_t * vec
 ) = (void *)0x004BBC60;
+
+static
+__thiscall
+void
+(*bayoVector4_set)(
+	vector4_t * puParm1,
+	float param_2,
+	float param_3,
+	float param_4,
+	float param_5
+) = (void *)0x00C5C6D0;
 
 static
 __thiscall
@@ -2605,6 +3335,13 @@ void
 	vector4_t * position,
 	int localBoneIndex
 ) = (void *)0x004A7600;
+
+static
+__thiscall
+void *
+(*bayoWmb_getHandle)(
+	bayoWmb_t * wmb
+) = (void *)0x004A6FA0;
 
 static
 __thiscall
@@ -2795,6 +3532,15 @@ undefined
 
 static
 __cdecl
+void
+(*bayo_addEulerAngleAndClamp)(
+	vector4_t * param_1,
+	vector4_t * param_2,
+	vector4_t * param_3
+) = (void *)0x00C6B010;
+
+static
+__cdecl
 void *
 (*bayo_allocAligned)(
 	uint size,
@@ -2806,7 +3552,7 @@ __cdecl
 void *
 (*bayo_allocAligned2)(
 	uint size,
-	bayoInstance_t * * ppBayoInstance
+	bayoHeapBase_t * pHeap
 ) = (void *)0x00C53BB0;
 
 static
@@ -2858,10 +3604,28 @@ void
 ) = (void *)0x00435A70;
 
 static
+__cdecl
+int
+(*bayo_bDeviceNeedsReset)(
+void) = (void *)0x00C549F0;
+
+static
+__stdcall
+uint
+(*bayo_bNotFullscreen)(
+void) = (void *)0x00C569C0;
+
+static
 __stdcall
 void
 (*bayo_bayoCriticalSection_t_05bea908_init)(
 void) = (void *)0x00C7C2B0;
+
+static
+__cdecl
+int
+(*bayo_beginScene)(
+void) = (void *)0x00C5EF40;
 
 static
 __cdecl
@@ -2886,11 +3650,41 @@ float
 
 static
 __cdecl
+void
+(*bayo_clearStreams)(
+void) = (void *)0x00C5DEF0;
+
+static
+__cdecl
 char
 (*bayo_compareDisplayModes)(
 	D3DDISPLAYMODE * nextDisplayMode,
 	D3DDISPLAYMODE * displayMode
 ) = (void *)0x00C53D60;
+
+static
+__cdecl
+float
+(*bayo_computeDistance)(
+	vector3_t * param_1,
+	vector3_t * param_2
+) = (void *)0x00C691F0;
+
+static
+__cdecl
+void
+(*bayo_computeInverseMatrix)(
+	matrix4x4_t * param_1,
+	matrix4x4_t * param_2
+) = (void *)0x00C64D80;
+
+static
+__cdecl
+float
+(*bayo_computeSquaredDistance)(
+	vector3_t * param_1,
+	vector3_t * param_2
+) = (void *)0x00C690B0;
 
 static
 __stdcall
@@ -3055,9 +3849,25 @@ float
 
 static
 __cdecl
+int
+(*bayo_deinitStructArray)(
+	void * pArray,
+	uint structSize,
+	int structNumber,
+	__thiscall void (*)(void * )
+) = (void *)0x00401000;
+
+static
+__cdecl
 void
 (*bayo_deleteAssetPool)(
 void) = (void *)0x00C5F5A0;
+
+static
+__stdcall
+void
+(*bayo_deleteOcclusionQueries)(
+void) = (void *)0x00C6D090;
 
 static
 __cdecl
@@ -3087,6 +3897,12 @@ int
 	motKey4_t * pMotKeys,
 	int nextFrameIndex
 ) = (void *)0x004B78B0;
+
+static
+__stdcall
+uint
+(*bayo_drawPrimitive)(
+void) = (void *)0x00C5DAB0;
 
 static
 __cdecl
@@ -3121,6 +3937,13 @@ int
 	int globalBoneIndex,
 	int trackIndex
 ) = (void *)0x004B80E0;
+
+static
+__cdecl
+void
+(*bayo_freeBones)(
+	bayoBone_t * param_1
+) = (void *)0x004A7CA0;
 
 static
 __cdecl
@@ -3232,6 +4055,15 @@ int
 (*bayo_getMaterialProperty7)(
 	bayoMaterialVectorTableItem_t * a1
 ) = (void *)0x00D4E540;
+
+static
+__cdecl
+int
+(*bayo_getModelName)(
+	char * charBuff,
+	int charBuffLength,
+	int modelNumber
+) = (void *)0x004DBEA0;
 
 static
 __cdecl
@@ -3397,6 +4229,12 @@ int
 
 static
 __cdecl
+undefined4
+(*bayo_initD3DQueries)(
+void) = (void *)0x00C54A20;
+
+static
+__cdecl
 int
 (*bayo_initDirect3D9)(
 	bayoHeapSub_t * heap1,
@@ -3547,6 +4385,14 @@ int
 	wtbHeader_t * * wtb,
 	uint textureIndex
 ) = (void *)0x00C6DD90;
+
+static
+__cdecl
+void
+(*bayo_loadExtraCloth)(
+	clpHeader_t * clpHeader,
+	bayoExtraCloth_t * extraCloth
+) = (void *)0x00420FD0;
 
 static
 __cdecl
@@ -3783,8 +4629,252 @@ static
 __thiscall
 int
 (*bayo_load_pl0000_pl0010)(
-	bayoActor_t * actor
+	bayoPlayerModel_t * playerModel
 ) = (void *)0x008C6680;
+
+static
+__thiscall
+int
+(*bayo_load_pl0020_pl0020)(
+	bayoPlayerModel_t * pbParm1
+) = (void *)0x008C6A40;
+
+static
+__thiscall
+int
+(*bayo_load_pl0023_pl0023)(
+	bayoPlayerModel_t * pbParm1
+) = (void *)0x008C6CC0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0025_pl0025)(
+	bayoPlayerModel_t * param_1
+) = (void *)0x008C6E60;
+
+static
+__thiscall
+int
+(*bayo_load_pl0026_pl0026)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C7140;
+
+static
+__thiscall
+int
+(*bayo_load_pl0027_pl0027)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C7420;
+
+static
+__thiscall
+int
+(*bayo_load_pl002a_pl002a)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C7700;
+
+static
+__thiscall
+int
+(*bayo_load_pl002c_pl002c)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C7A50;
+
+static
+__thiscall
+int
+(*bayo_load_pl002d_pl002d)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C7DA0;
+
+static
+__thiscall
+int
+(*bayo_load_pl002e_pl002e)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8080;
+
+static
+__thiscall
+int
+(*bayo_load_pl002f_pl002f)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8360;
+
+static
+__thiscall
+int
+(*bayo_load_pl0030_pl0030)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8680;
+
+static
+__thiscall
+int
+(*bayo_load_pl004b_pl004b)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8920;
+
+static
+__thiscall
+int
+(*bayo_load_pl0052_pl0052)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8CA0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0060_pl0060)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C8ED0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0061_pl0061)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C90D0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0062_pl0062)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C92D0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0064_pl0064)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C94D0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0066_pl0066)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C9850;
+
+static
+__thiscall
+int
+(*bayo_load_pl0067_pl0067)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C9B50;
+
+static
+__thiscall
+int
+(*bayo_load_pl0068_pl0068)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C9DB0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0069_pl0069)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008C9FB0;
+
+static
+__thiscall
+int
+(*bayo_load_pl006a_pl006a)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CA1B0;
+
+static
+__thiscall
+int
+(*bayo_load_pl006e_pl006e)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CA430;
+
+static
+__thiscall
+int
+(*bayo_load_pl0070_pl0070)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CA6F0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0072_pl0072)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CA9B0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0074_pl0074)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CACE0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0075_pl0075)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CAFE0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0083_pl0083)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CB240;
+
+static
+__thiscall
+int
+(*bayo_load_pl0085_pl0085)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CB5F0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0087_pl0087)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CB9A0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0089_pl0089)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CBDC0;
+
+static
+__thiscall
+int
+(*bayo_load_pl008a_pl008a)(
+	bayoPlayerModel_t * pPlayer
+) = (void *)0x008CC090;
+
+static
+__cdecl
+int
+(*bayo_occlusionQueryIssueBegin)(
+	int queryIndex
+) = (void *)0x00C6D220;
+
+static
+__cdecl
+int
+(*bayo_occlusionQueryIssueEnd)(
+	int queyIndex
+) = (void *)0x00C6D2E0;
+
+static
+__cdecl
+int
+(*bayo_presentNextBuffer)(
+void) = (void *)0x00C54CB0;
 
 static
 __cdecl
@@ -3817,6 +4907,12 @@ undefined
 (*bayo_releaseCriLoaderHandle)(
 	void * criLoaderHandle
 ) = (void *)0x00CD1D82;
+
+static
+__cdecl
+void
+(*bayo_releaseDevice)(
+void) = (void *)0x00C549A0;
 
 static
 __cdecl
@@ -3890,6 +4986,35 @@ void
 static
 __cdecl
 void
+(*bayo_setPrimitiveType)(
+	D3DPRIMITIVETYPE param_1
+) = (void *)0x00C5EF90;
+
+static
+__cdecl
+void
+(*bayo_setPrimitiveTypeAndCount)(
+	D3DPRIMITIVETYPE primitiveType,
+	undefined4 primitiveCount
+) = (void *)0x00C5E190;
+
+static
+__cdecl
+int
+(*bayo_setStream)(
+	uint streamNumber,
+	bayoStreamData_t * streamData
+) = (void *)0x00C5E0F0;
+
+static
+__cdecl
+int
+(*bayo_setViewport)(
+void) = (void *)0x00C5D610;
+
+static
+__cdecl
+void
 (*bayo_slerpEulerAngles)(
 	vector4_t * eulerAngles,
 	vector4_t * previousEulerAngles,
@@ -3907,6 +5032,57 @@ void
 	int ptrDiff,
 	__cdecl char (*)(void * , void * )
 ) = (void *)0x00C55DF0;
+
+static
+__thiscall
+struct_050a57d0_t *
+(*bayo_struct_050a57d0_init)(
+	struct_050a57d0_t * iParm1
+) = (void *)0x00442D60;
+
+static
+__thiscall
+void
+(*bayo_struct_050a57d0_substruct_2_copy)(
+	struct_050a57d0_substruct_2_t * puParm1,
+	struct_050a57d0_substruct_2_t * param_2
+) = (void *)0x00442910;
+
+static
+__thiscall
+void
+(*bayo_struct_051ae320_clear)(
+	struct_051ae320_t * puParm1
+) = (void *)0x00C67460;
+
+static
+__thiscall
+void
+(*bayo_struct_051ae320_delete)(
+	struct_051ae320_t * puParm1
+) = (void *)0x00C67630;
+
+static
+__thiscall
+void
+(*bayo_struct_051ae320_delete_dynamic)(
+	struct_051ae320_t * puParm1,
+	byte param_2
+) = (void *)0x00C67C80;
+
+static
+__thiscall
+void
+(*bayo_struct_051ae320_init)(
+	struct_051ae320_t * this
+) = (void *)0x00C675D0;
+
+static
+__thiscall
+int
+(*bayo_struct_051ae320_substruct_bInited)(
+	struct_051ae320_substruct_t * iParm1
+) = (void *)0x00C68940;
 
 static
 __thiscall
@@ -4245,6 +5421,13 @@ undefined
 (*setWindowed)(
 	int bWindowed
 ) = (void *)0x00C569E0;
+
+static
+__thiscall
+int
+(*struct_05a50030_init)(
+	bayoCollisionCache_t * iParm1
+) = (void *)0x004999A0;
 
 static
 __cdecl
