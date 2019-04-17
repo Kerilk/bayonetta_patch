@@ -39,6 +39,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
     uint32_t i;
     struct flgHeader_t *header;
     struct bayoMesh_t *mesh;
+    struct bayoActorBase_t* baseActor = (bayoActorBase_t*)actor;
     struct flgMeshUnknownSubstructFlags_t *ussflgs;
     struct flgMeshUnknownFlags_t *uflgs;
     int *data;
@@ -53,7 +54,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
                     ((unsigned char*)flgHandle +
                      header->meshUnknownSubstructFlagsOffset);
         for (i = 0; i < header->meshUnknownSubstructFlagsCount; i++) {
-            set_mesh_substruct_flags(actor, mesh,
+            set_mesh_substruct_flags(baseActor, mesh,
                                      ussflgs[i].meshIndex,
                                      ussflgs[i].mask,
                                      ussflgs[i].flags);
@@ -66,7 +67,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
                     ((unsigned char*)flgHandle +
                      header->meshUnknownFlagsOffset);
         for (i = 0; i < header->meshUnknownFlagsCount; i++) {
-            mesh = bayoActor_getMesh(actor, uflgs[i].meshIndex);
+            mesh = bayoActor_getMesh(baseActor, uflgs[i].meshIndex);
             if (mesh) {
                 mesh->unknownFlags = uflgs[i].value;
             }
@@ -79,7 +80,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
                     ((unsigned char*)flgHandle +
                      header->meshUnknownSubstructFieldCOffset);
         for (i = 0; i <header->meshUnknownSubstructFieldCCount; i++) {
-            mesh = bayoActor_getMesh(actor, uflgs[i].meshIndex);
+            mesh = bayoActor_getMesh(baseActor, uflgs[i].meshIndex);
             if (mesh) {
                 bayoMesh_setUnknownSubstructFieldC(mesh, uflgs[i].value);
             }

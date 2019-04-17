@@ -1,5 +1,21 @@
 static
 __stdcall
+HRESULT
+(*D3DXCompileShader)(
+	LPCSTR pSrcData,
+	UINT srcDataLen,
+	D3DXMACRO * pDefines,
+	LPD3DXINCLUDE pInclude,
+	LPCSTR pFunctionName,
+	LPCSTR pProfile,
+	DWORD Flags,
+	LPD3DXBUFFER * ppShaders,
+	LPD3DXBUFFER * ppErrorMsgs,
+	LPD3DXCONSTANTTABLE * ppConstantTable
+) = (void *)0x00C85646;
+
+static
+__stdcall
 uint
 (*D3DXCreateCubeTextureFromFileInMemoryEx)(
 	void * pDevice,
@@ -38,6 +54,14 @@ int
 	void * pPalette,
 	void * * ppTexture
 ) = (void *)0x00C85652;
+
+static
+__stdcall
+undefined
+(*D3DXGetShaderConstantTable)(
+	DWORD * pFunction,
+	LPD3DXCONSTANTTABLE * ppConstantTable
+) = (void *)0x00C85640;
 
 static
 __stdcall
@@ -84,11 +108,19 @@ vector4_t *
 
 static
 __stdcall
-vector3_t *
+D3DXVECTOR3 *
+(*D3DXVec3Normalize)(
+	D3DXVECTOR3 * pOut,
+	D3DXVECTOR3 * pV
+) = (void *)0x00C85604;
+
+static
+__stdcall
+D3DXVECTOR3 *
 (*D3DXVec3TransformNormal)(
-	vector3_t * pOut,
-	vector3_t * pV,
-	matrix4x4_t * pM
+	D3DXVECTOR3 * pOut,
+	D3DXVECTOR3 * pV,
+	D3DXMATRIX * pM
 ) = (void *)0x00C855CE;
 
 static
@@ -200,6 +232,13 @@ void
 	bayoActorGarment_t * pvParm1,
 	byte bParm2
 ) = (void *)0x004CE7B0;
+
+static
+__thiscall
+int
+(*bayoActorGarment_load)(
+	bayoActorGarment_t * actor
+) = (void *)0x009F2330;
 
 static
 __thiscall
@@ -589,7 +628,7 @@ static
 __thiscall
 bayoMesh_t *
 (*bayoActor_getMesh)(
-	bayoActor_t * actor,
+	bayoActorBase_t * actor,
 	int meshIndex
 ) = (void *)0x004A32E0;
 
@@ -817,16 +856,6 @@ bayoAtomicCounter_t *
 (*bayoAtomicCounter_init)(
 	bayoAtomicCounter_t * puParm1
 ) = (void *)0x00513110;
-
-static
-__thiscall
-uint
-(*bayoBatch_createIndexBuffer)(
-	bayoBatch_t * batch,
-	ushort * pIndices,
-	uint indexSize,
-	uint numIndices
-) = (void *)0x00C6F320;
 
 static
 __thiscall
@@ -1224,6 +1253,14 @@ int
 
 static
 __thiscall
+D3DCOLORVALUE *
+(*bayoD3DCOLORVALUE_fromARGB)(
+	D3DCOLORVALUE * pColorValue,
+	D3DCOLOR color
+) = (void *)0x00C5C780;
+
+static
+__thiscall
 void *
 (*bayoDat_findFile)(
 	bayoDat_t * datFile,
@@ -1246,6 +1283,14 @@ int
 	char * extension,
 	uint index
 ) = (void *)0x00C5B3B0;
+
+static
+__thiscall
+uint
+(*bayoDat_findFileSize)(
+	bayoDat_t * dat,
+	char * fileName
+) = (void *)0x00C5B650;
 
 static
 __thiscall
@@ -1350,6 +1395,116 @@ void
 
 static
 __thiscall
+int
+(*bayoEffectBase_apply)(
+	bayoEffectBase_t * material
+) = (void *)0x00C60A10;
+
+static
+__thiscall
+int
+(*bayoEffectBase_compileShader)(
+	bayoEffectBase_t * iParm1,
+	LPCSTR shaderSource,
+	UINT sourceSize
+) = (void *)0x00C5FF10;
+
+static
+__thiscall
+void
+(*bayoEffectBase_delete)(
+	bayoEffectBase_t * puParm1
+) = (void *)0x00C60AC0;
+
+static
+__thiscall
+void
+(*bayoEffectBase_delete_dynamic)(
+	bayoEffectBase_t * this
+) = (void *)0x00C60100;
+
+static
+__thiscall
+bayoEffectBase_t *
+(*bayoEffectBase_init)(
+	bayoEffectBase_t * this
+) = (void *)0x00C5F980;
+
+static
+__thiscall
+int
+(*bayoEffectBase_loadMatrix)(
+	bayoEffectBase_t * effect,
+	bayoEffectMatrix_t * effectMatrix,
+	char * matrixName
+) = (void *)0x00C60180;
+
+static
+__thiscall
+int
+(*bayoEffectBase_loadMatrixVertex)(
+	bayoEffectBase_t * iParm1,
+	bayoEffectMatrix_t * param_2,
+	char * param_3
+) = (void *)0x00C60230;
+
+static
+__thiscall
+uint
+(*bayoEffectBase_loadSampler)(
+	bayoEffectBase_t * effect,
+	bayoEffectSampler_t * sampler,
+	char * samplerName
+) = (void *)0x00C602B0;
+
+static
+__thiscall
+int
+(*bayoEffectBase_loadShaders)(
+	bayoEffectBase_t * effect,
+	LPVOID psoHandle,
+	LPVOID vsoHandle
+) = (void *)0x00C5FD70;
+
+static
+__thiscall
+int
+(*bayoEffectBase_loadShadersFromName)(
+	bayoEffectBase_t * effect,
+	char * vertexShaderName,
+	char * pixelShaderName
+) = (void *)0x00D52DD0;
+
+static
+__thiscall
+int
+(*bayoEffectBase_loadShadersFromPath)(
+	bayoEffectBase_t * effect,
+	char * vertexShaderPath,
+	char * pixelShaderPath
+) = (void *)0x00C5FE80;
+
+static
+__thiscall
+int
+(*bayoEffectBase_updateMatrix)(
+	bayoEffectBase_t * effect,
+	bayoEffectMatrix_t * matrix,
+	matrix4x4_t * data
+) = (void *)0x00C60330;
+
+static
+__thiscall
+int
+(*bayoEffectBase_updateMatrixWithSize)(
+	bayoEffect_00eac430_t * effect,
+	bayoEffectMatrix_t * UVPosMatrix,
+	LPCVOID data,
+	int floatCount
+) = (void *)0x00C606E0;
+
+static
+__thiscall
 void
 (*bayoEffectCacheBase_delete)(
 	bayoEffectCache_t * iParm1
@@ -1392,6 +1547,565 @@ void
 	char * effectLibName,
 	void * effHandle
 ) = (void *)0x0059B370;
+
+static
+__thiscall
+void
+(*bayoEffectMatrix_delete)(
+	bayoEffectMatrix_t * this
+) = (void *)0x00C64810;
+
+static
+__thiscall
+bayoEffectMatrix_t *
+(*bayoEffectMatrix_init)(
+	bayoEffectMatrix_t * this
+) = (void *)0x00C647D0;
+
+static
+__cdecl
+int
+(*bayoEffectMatrix_setARGBColor)(
+	bayoEffectMatrix_t * effectMatrix,
+	D3DCOLOR color
+) = (void *)0x00C60570;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_computeFlags)(
+	bayoEffectSampler_t * effectSampler
+) = (void *)0x00C64560;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_delete)(
+	bayoEffectSampler_t * sampler
+) = (void *)0x00C64530;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_init)(
+	bayoEffectSampler_t * sampler
+) = (void *)0x00C64500;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setAddressU)(
+	bayoEffectSampler_t * effect,
+	D3DTEXTUREADDRESS * param_2
+) = (void *)0x00C64750;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setAddressV)(
+	bayoEffectSampler_t * effect,
+	D3DTEXTUREADDRESS * param_2
+) = (void *)0x00C64770;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setMagFilter)(
+	bayoEffectSampler_t * pbParm1,
+	D3DTEXTUREFILTERTYPE * param_2
+) = (void *)0x00C64730;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setMaxAnisotropy)(
+	bayoEffectSampler_t * effectSampler,
+	DWORD * maxAnisotropy
+) = (void *)0x00C647B0;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setMinFilter)(
+	bayoEffectSampler_t * pbParm1,
+	D3DTEXTUREFILTERTYPE * param_2
+) = (void *)0x00C646F0;
+
+static
+__thiscall
+void
+(*bayoEffectSampler_setMipFilter)(
+	bayoEffectSampler_t * sampler,
+	D3DTEXTUREFILTERTYPE * param_2
+) = (void *)0x00C64710;
+
+static
+__cdecl
+int
+(*bayoEffectSampler_update)(
+	bayoEffectSampler_t * sampler,
+	void * param_2,
+	uint param_3,
+	int flag
+) = (void *)0x00C60CE0;
+
+static
+__thiscall
+void
+(*bayoEffect_00da50ac_delete)(
+	bayoEffect_00da50ac_t * pbParm1
+) = (void *)0x00445E90;
+
+static
+__thiscall
+bayoEffect_00da50ac_t *
+(*bayoEffect_00da50ac_deleteAndFree)(
+	bayoEffect_00da50ac_t * pvParm1,
+	byte bParm2
+) = (void *)0x00446A10;
+
+static
+__thiscall
+void
+(*bayoEffect_00da50ac_delete_dynamic)(
+	bayoEffect_00da50ac_t * pbParm1
+) = (void *)0x00445EF0;
+
+static
+__thiscall
+bayoEffect_00da50ac_t *
+(*bayoEffect_00da50ac_init)(
+	bayoEffect_00da50ac_t * pbParm1
+) = (void *)0x00442E00;
+
+static
+__thiscall
+void
+(*bayoEffect_00da518c_delete)(
+	bayoEffect_00da518c_t * pbParm1
+) = (void *)0x00445F50;
+
+static
+__thiscall
+bayoEffect_00da518c_t *
+(*bayoEffect_00da518c_deleteAndFree)(
+	bayoEffect_00da518c_t * pbParm1,
+	byte param_2
+) = (void *)0x00446A30;
+
+static
+__thiscall
+void
+(*bayoEffect_00da518c_delete_dynamic)(
+	bayoEffect_00da518c_t * pbParm1
+) = (void *)0x00445F90;
+
+static
+__thiscall
+bayoEffect_00da518c_t *
+(*bayoEffect_00da518c_init)(
+	bayoEffect_00da518c_t * pbParm1
+) = (void *)0x00443160;
+
+static
+__thiscall
+int
+(*bayoEffect_00da518c_load)(
+	bayoEffect_00da518c_t * effect
+) = (void *)0x004431A0;
+
+static
+__thiscall
+void
+(*bayoEffect_00da51f8_delete)(
+	bayoEffect_00da51f8_t * pbParm1
+) = (void *)0x00446130;
+
+static
+__thiscall
+bayoEffect_00da51f8_t *
+(*bayoEffect_00da51f8_deleteAndFree)(
+	bayoEffect_00da51f8_t * pbParm1,
+	byte param_2
+) = (void *)0x00446AF0;
+
+static
+__thiscall
+void
+(*bayoEffect_00da51f8_delete_dynamic)(
+	bayoEffect_00da51f8_t * pbParm1
+) = (void *)0x00446180;
+
+static
+__thiscall
+bayoEffect_00da51f8_t *
+(*bayoEffect_00da51f8_init)(
+	bayoEffect_00da51f8_t * pbParm1
+) = (void *)0x004435D0;
+
+static
+__thiscall
+int
+(*bayoEffect_00da51f8_load)(
+	bayoEffect_00da51f8_t * effect
+) = (void *)0x00443630;
+
+static
+__thiscall
+void
+(*bayoEffect_00da5778_delete)(
+	bayoEffect_00da5778_t * pbParm1
+) = (void *)0x00446010;
+
+static
+__thiscall
+bayoEffect_00da5778_t *
+(*bayoEffect_00da5778_deleteAndFree)(
+	bayoEffect_00da5778_t * pbParm1,
+	byte bParm2
+) = (void *)0x00446A80;
+
+static
+__thiscall
+bayoEffect_00da5778_t *
+(*bayoEffect_00da5778_init)(
+	bayoEffect_00da5778_t * pbParm1
+) = (void *)0x00445FD0;
+
+static
+__thiscall
+int
+(*bayoEffect_00da5778_load)(
+	bayoEffect_00da5778_t * pbParm1
+) = (void *)0x00443370;
+
+static
+__thiscall
+void
+(*bayoEffect_00da5784_delete)(
+	bayoEffect_00da5784_t * pbParm1
+) = (void *)0x004460C0;
+
+static
+__thiscall
+bayoEffect_00da5784_t *
+(*bayoEffect_00da5784_deleteAndFree)(
+	bayoEffect_00da5784_t * pbParm1,
+	byte bParm2
+) = (void *)0x00446AA0;
+
+static
+__thiscall
+void
+(*bayoEffect_00da5784_delete_dynamic)(
+	bayoEffect_00da5784_t * pbParm1
+) = (void *)0x00446100;
+
+static
+__thiscall
+bayoEffect_00da5784_t *
+(*bayoEffect_00da5784_init)(
+	bayoEffect_00da5784_t * pbParm1
+) = (void *)0x00446080;
+
+static
+__thiscall
+int
+(*bayoEffect_00da5784_load)(
+	bayoEffect_00da5784_t * effect
+) = (void *)0x00443470;
+
+static
+__thiscall
+bayoEffect_00eac430_t *
+(*bayoEffect_00eac430_deleteAndFreen)(
+	bayoEffect_00eac430_t * pbParm1,
+	byte param_2
+) = (void *)0x00C68170;
+
+static
+__thiscall
+void
+(*bayoEffect_00eac430_delete_dynamic)(
+	bayoEffect_00eac430_t * pbParm1
+) = (void *)0x00C68140;
+
+static
+__thiscall
+bayoEffect_00eac430_t *
+(*bayoEffect_00eac430_init)(
+	bayoEffect_00eac430_t * effect
+) = (void *)0x00C67F70;
+
+static
+__thiscall
+int
+(*bayoEffect_00eac430_load)(
+	bayoEffect_00eac430_t * effect,
+	LPCSTR shaderSource,
+	UINT sourceSize
+) = (void *)0x00C680E0;
+
+static
+__thiscall
+int
+(*bayoEffect_00eac430_loadSampler0AndUVPos)(
+	bayoEffect_00eac430_t * iParm1
+) = (void *)0x00C67FB0;
+
+static
+__thiscall
+void
+(*bayoEffect_00eac430_updateSampler0)(
+	bayoEffect_00eac430_t * iParm1,
+	void * param_2,
+	int param_3
+) = (void *)0x00C680A0;
+
+static
+__thiscall
+int
+(*bayoEffect_00eac430_updateUVPos)(
+	bayoEffect_00eac430_t * effect,
+	LPCVOID pData
+) = (void *)0x00C680C0;
+
+static
+__thiscall
+bayoEffect_00eac444_t *
+(*bayoEffect_00eac444_init)(
+	bayoEffect_00eac444_t * pbParm1
+) = (void *)0x00C681A0;
+
+static
+__thiscall
+int
+(*bayoEffect_00eac444_load)(
+	bayoEffect_00eac444_t * effect,
+	LPCSTR shaderSource,
+	UINT sourceSize
+) = (void *)0x00C682B0;
+
+static
+__thiscall
+int
+(*bayoEffect_00eac444_loadSampler0)(
+	bayoEffect_00eac444_t * effect
+) = (void *)0x00C681D0;
+
+static
+__thiscall
+void
+(*bayoEffect_00eac444_updateSampler0)(
+	bayoEffect_00eac444_t * iParm1,
+	void * param_2,
+	uint param_3
+) = (void *)0x00C68290;
+
+static
+__thiscall
+void
+(*bayoEffect_00eac450_delete)(
+	bayoEffect_00eac450_t * pbParm1
+) = (void *)0x00C7B050;
+
+static
+__thiscall
+bayoEffect_00eac450_t *
+(*bayoEffect_00eac450_deleteAndFree)(
+	bayoEffect_00eac450_t * puParm1,
+	byte param_2
+) = (void *)0x00C68410;
+
+static
+__thiscall
+bayoEffect_00eac450_t *
+(*bayoEffect_00eac450_init)(
+	bayoEffect_00eac450_t * pbParm1
+) = (void *)0x00C68360;
+
+static
+__thiscall
+uint
+(*bayoEffect_00eac450_load)(
+	bayoEffect_00eac450_t * effect,
+	LPCSTR shaderSource,
+	UINT sourceSize
+) = (void *)0x00C68390;
+
+static
+__thiscall
+bayoEffect_00eac598_t *
+(*bayoEffect_00eac598_deleteAndFree)(
+	bayoEffect_00eac598_t * pbParm1,
+	byte param_2
+) = (void *)0x00C68FF0;
+
+static
+__thiscall
+bayoEffect_00eac598_t *
+(*bayoEffect_00eac598_init)(
+	bayoEffect_00eac598_t * pbParm1
+) = (void *)0x00C68EB0;
+
+static
+__thiscall
+uint
+(*bayoEffect_00eac598_load)(
+	bayoEffect_00eac598_t * iParm1,
+	LPCSTR param_2,
+	UINT param_3
+) = (void *)0x00C68EE0;
+
+static
+__thiscall
+void
+(*bayoEffect_00eac598_updateOutlineColor)(
+	bayoEffect_00eac598_t * iParm1,
+	D3DCOLOR color
+) = (void *)0x00C68FB0;
+
+static
+__thiscall
+void
+(*bayoEffect_00eb0894_delete_dynamic)(
+	bayoEffect_00eb0894_t * pbParm1
+) = (void *)0x00C7B220;
+
+static
+__thiscall
+bayoEffect_00eb0894_t *
+(*bayoEffect_00eb0894_init)(
+	bayoEffect_00eb0894_t * pbParm1
+) = (void *)0x00C7B020;
+
+static
+__thiscall
+int
+(*bayoEffect_00eb0894_load)(
+	bayoEffect_00eac450_t * effect,
+	LPCSTR shaderSource,
+	UINT sourceSize
+) = (void *)0x00C7B150;
+
+static
+__thiscall
+void
+(*bayoEffect_00eb0894_setMaterialColorARGBColor)(
+	bayoEffect_00eb0894_t * effect,
+	D3DCOLOR color
+) = (void *)0x00C7B110;
+
+static
+__thiscall
+void
+(*bayoEffect_00eb0894_updateViewProjMatrix)(
+	bayoEffect_00eb0894_t * pbParm1,
+	matrix4x4_t * param_2
+) = (void *)0x00C7B0D0;
+
+static
+__thiscall
+void
+(*bayoEffect_00eb0894_updateWorldMatrix)(
+	bayoEffect_00eb0894_t * effect,
+	matrix4x4_t * matrix
+) = (void *)0x00C7B0F0;
+
+static
+__thiscall
+bayoEffect_00ed212c_t *
+(*bayoEffect_00ed212c_deleteAndFree)(
+	bayoEffect_00ed212c_t * pbParm1,
+	byte param_2
+) = (void *)0x00D52150;
+
+static
+__thiscall
+void
+(*bayoEffect_00ed212c_delete_dynamic)(
+	bayoEffect_00ed212c_t * pbParm1
+) = (void *)0x00D52120;
+
+static
+__thiscall
+void
+(*bayoEffect_00ed212c_updateSampler)(
+	bayoEffect_00ed212c_t * effect,
+	void * param_2,
+	uint param_3
+) = (void *)0x00D520D0;
+
+static
+__thiscall
+bayoEm0000Substruct1Substruct_t *
+(*bayoEm0000Substruct1Substruct_init)(
+	bayoEm0000Substruct1Substruct_t * puParm1
+) = (void *)0x0046DE00;
+
+static
+__thiscall
+undefined4 *
+(*bayoEm0000Substruct1_init)(
+	bayoEm0000Substruct1_t * puParm1
+) = (void *)0x00418460;
+
+static
+__thiscall
+bayoEm0000Substruct2_t *
+(*bayoEm0000Substruct2_init)(
+	bayoEm0000Substruct2_t * puParm1
+) = (void *)0x004C0470;
+
+static
+__thiscall
+undefined4 *
+(*bayoEm0000Substruct3_init)(
+	bayoEm0000Substruct3_t * puParm1
+) = (void *)0x0042E400;
+
+static
+__thiscall
+bayoEm0000Substruct4_t *
+(*bayoEm0000Substruct4_init)(
+	bayoEm0000Substruct4_t * puParm1
+) = (void *)0x00419340;
+
+static
+__thiscall
+bayoEm0000Substruct5_t *
+(*bayoEm0000Substruct5_init)(
+	bayoEm0000Substruct5_t * puParm1
+) = (void *)0x004E5C60;
+
+static
+__thiscall
+void
+(*bayoEm0000_delete)(
+	bayoEm0000_t * actor
+) = (void *)0x004C06F0;
+
+static
+__thiscall
+void
+(*bayoEm0000_deleteAndFree)(
+	bayoEm0000_t * pvParm1,
+	byte bParm2
+) = (void *)0x004CE8E0;
+
+static
+__thiscall
+bayoEm0000_t *
+(*bayoEm0000_init)(
+	bayoEm0000_t * param_1
+) = (void *)0x004C96F0;
+
+static
+__thiscall
+int
+(*bayoEm0000_load)(
+	bayoEm0000_t * pbParm1
+) = (void *)0x0062CB40;
 
 static
 __thiscall
@@ -2355,6 +3069,30 @@ bayoHitVector_t *
 
 static
 __thiscall
+uint
+(*bayoIndexStramData_load)(
+	bayoIndexStreamData_t * indexStream,
+	ushort * pIndices,
+	uint indexSize,
+	uint numIndices
+) = (void *)0x00C6F320;
+
+static
+__thiscall
+UINT
+(*bayoIndexStreamData_getIndexCount)(
+	bayoIndexStreamData_t * indexStream
+) = (void *)0x00C6F300;
+
+static
+__thiscall
+UINT
+(*bayoIndexStreamData_getOffset)(
+	bayoIndexStreamData_t * indexStream
+) = (void *)0x00C6F310;
+
+static
+__thiscall
 bayoJobManagerItem_t *
 (*bayoJobManagerItem_init)(
 	bayoJobManagerItem_t * item
@@ -2390,10 +3128,192 @@ void
 
 static
 __thiscall
+void
+(*bayoMaterialEffect_delete)(
+	bayoMaterialEffect_t * puParm1
+) = (void *)0x00D52680;
+
+static
+__thiscall
+bayoMaterialEffect_t *
+(*bayoMaterialEffect_deleteAndFree)(
+	bayoMaterialEffect_t * pbParm1,
+	byte param_2
+) = (void *)0x00D53740;
+
+static
+__thiscall
+void
+(*bayoMaterialEffect_delete_dynamic)(
+	bayoMaterialEffect_t * pbParm1
+) = (void *)0x00D52690;
+
+static
+__thiscall
+bayoMaterialEffect_t *
+(*bayoMaterialEffect_init)(
+	bayoMaterialEffect_t * puParm1
+) = (void *)0x00D52F10;
+
+static
+__thiscall
+int
+(*bayoMaterialEffect_loadShadersFromPath)(
+	bayoMaterialEffect_t * effect,
+	char * vertexShaderPath,
+	char * pixelShaderPath
+) = (void *)0x00D526C0;
+
+static
+__thiscall
+int
+(*bayoMaterialEffect_setBaseVertexIndex)(
+	bayoMaterialEffect_t * effect,
+	INT baseVertexIndex
+) = (void *)0x00C5FCB0;
+
+static
+__thiscall
+void
+(*bayoMaterialEffect_setDefaultSamplers)(
+	bayoMaterialEffect_t * effect,
+	int * defaultSamplers
+) = (void *)0x00D527E0;
+
+static
+__thiscall
+int
+(*bayoMaterialEffect_setEffectParameters)(
+	bayoMaterialEffect_t * effect,
+	char * vertexShaderName,
+	char * pixelShaderName,
+	int * intEntries,
+	int * intEntries2,
+	int * defaultSamplers,
+	UINT * pRegisters,
+	UINT * pVectorCounts,
+	int * samplerParameters,
+	undefined4 param_10,
+	undefined4 param_11
+) = (void *)0x00D536C0;
+
+static
+__thiscall
+void
+(*bayoMaterialEffect_setIntEntries)(
+	bayoMaterialEffect_t * effect,
+	int * entries
+) = (void *)0x00D526E0;
+
+static
+__thiscall
+void
+(*bayoMaterialEffect_setIntEntries2)(
+	bayoMaterialEffect_t * effect,
+	int * entries
+) = (void *)0x00D52770;
+
+static
+__thiscall
+void
+(*bayoMaterialEffect_setSamplerParameters)(
+	bayoMaterialEffect_t * effect,
+	int * samplerParameters
+) = (void *)0x00D52F80;
+
+static
+__thiscall
+int
+(*bayoMaterialEffect_setVertexBounds)(
+	bayoMaterialEffect_t * iParm1,
+	UINT vertexLimit,
+	UINT firstVertexIndex
+) = (void *)0x00C5FC90;
+
+static
+__thiscall
+int
+(*bayoMaterialEffect_setVertexSahderConstants)(
+	bayoMaterialEffect_t * effect,
+	matrix4x4_t * pMatrices,
+	uint matrixCount
+) = (void *)0x00D53050;
+
+static
+__thiscall
+int
+(*bayoMaterial_ModelShaderPls00_BXNXX_load)(
+	bayoMaterial_t * piParm1
+) = (void *)0x00D5FE10;
+
+static
+__thiscall
+uint
+(*bayoMaterial_ModelShaderPls00_BXNXX_loadFromPath)(
+	bayoMaterial_t * iParm1
+) = (void *)0x00D5FDF0;
+
+static
+__thiscall
+void
+(*bayoMaterial_ModelShaderPls00_BXNXX_loadSpecifiedEffect)(
+	bayoMaterial_t * material,
+	uint effectIndex,
+	char * vertexShaderName,
+	char * pixelShaderName
+) = (void *)0x00D5FE90;
+
+static
+__thiscall
+void
+(*bayoMaterial_ModelShaderPls00_BXNXX_reset)(
+	bayoMaterial_t * material
+) = (void *)0x00D5FBE0;
+
+static
+__thiscall
+void
+(*bayoMaterial_ModelShaderPls00_BXNXX_setPixelShaderConstants)(
+	bayoMaterial_t * material,
+	float * constants
+) = (void *)0x00D5FC30;
+
+static
+__thiscall
+void
+(*bayoMaterial_apply)(
+	bayoMaterial_t * material,
+	uint param_2
+) = (void *)0x00D6EB20;
+
+static
+__thiscall
+void
+(*bayoMaterial_delete)(
+	bayoMaterial_t * param_1
+) = (void *)0x00D62140;
+
+static
+__thiscall
+void
+(*bayoMaterial_setActiveEffect)(
+	bayoMaterial_t * material,
+	uint param_2
+) = (void *)0x00D61990;
+
+static
+__thiscall
 bayoMeshGeometryTable_t *
 (*bayoMeshGeometryTable_init)(
 	bayoMeshGeometryTable_t * table
 ) = (void *)0x0042D060;
+
+static
+__thiscall
+void
+(*bayoMeshSelector_init)(
+	bayoMeshSelector_t * iParm1
+) = (void *)0x004A1D20;
 
 static
 __thiscall
@@ -2901,6 +3821,13 @@ void *
 
 static
 __thiscall
+int
+(*bayoOcclusionQuery_init)(
+	bayoOcclusionQuery_t * param_1
+) = (void *)0x00C6CFC0;
+
+static
+__thiscall
 uint
 (*bayoOption_getBool)(
 	int iParm1,
@@ -2909,10 +3836,32 @@ uint
 
 static
 __thiscall
+undefined4 *
+(*bayoPlayerModelBase_init)(
+	bayoPlayerModelBase_t * puParm1
+) = (void *)0x00432D30;
+
+static
+__thiscall
 void
 (*bayoPlayerModel_delete)(
 	bayoPlayerModel_t * pbParm1
 ) = (void *)0x004CE640;
+
+static
+__thiscall
+bayoPlayerModel_t *
+(*bayoPlayerModel_deleteAndFree)(
+	bayoPlayerModel_t * pbParm1,
+	byte bParm2
+) = (void *)0x004CFEB0;
+
+static
+__thiscall
+bayoPlayerModel_t *
+(*bayoPlayerModel_init)(
+	bayoPlayerModel_t * pbParm1
+) = (void *)0x004CE5B0;
 
 static
 __thiscall
@@ -3091,7 +4040,7 @@ static
 __thiscall
 void
 (*bayoShaders_init)(
-	bayoShaders_t * shaders,
+	bayoDat_t * shaders,
 	void * shaderFile
 ) = (void *)0x00C5B320;
 
@@ -3108,13 +4057,6 @@ undefined4 *
 (*bayoSteamCallbacks_init)(
 	bayoSteamCallbacks_t * puParm1
 ) = (void *)0x00C80230;
-
-static
-__thiscall
-uint
-(*bayoStreamData_getVertexCount)(
-	bayoStreamData_t * streamData
-) = (void *)0x00C5F8D0;
 
 static
 __thiscall
@@ -3274,7 +4216,7 @@ int
 
 static
 __thiscall
-void
+vector4_t *
 (*bayoVector4_set)(
 	vector4_t * puParm1,
 	float param_2,
@@ -3285,31 +4227,10 @@ void
 
 static
 __thiscall
-int
-(*bayoVertexBufferCacheItem_load)(
-	bayoVertexBufferCacheItem_t * vertexBuffer,
-	float * pPositions,
-	uint structSize,
-	uint numVertices
-) = (void *)0x00C5F8F0;
-
-static
-__thiscall
 void
 (*bayoVertexBuffer_Init2)(
 	bayoVertexBuffer_t * vertexBuffer
 ) = (void *)0x00C6F1A0;
-
-static
-__thiscall
-uint
-(*bayoVertexBuffer_allocNormals)(
-	bayoVertexBufferCacheItem_t * vertexBuffer,
-	void * pSource,
-	uint structSize,
-	uint numVertices,
-	void * allocator
-) = (void *)0x00C5F920;
 
 static
 __thiscall
@@ -3327,10 +4248,510 @@ void
 
 static
 __thiscall
+uint
+(*bayoVertexDeclaration1_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68490;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration2_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C684C0;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration3_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C684F0;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration4_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68520;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration5_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68550;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration6_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68580;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration7_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C685B0;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration8_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C685E0;
+
+static
+__thiscall
+uint
+(*bayoVertexDeclaration9_create)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68610;
+
+static
+__thiscall
+int
+(*bayoVertexDeclarationBase_create)(
+	bayoVertexDeclarationBase_t * vertexDeclaration,
+	D3DVERTEXELEMENT9 * vertexElements
+) = (void *)0x00C68450;
+
+static
+__thiscall
+void
+(*bayoVertexDeclarationBase_delete)(
+	bayoVertexDeclarationBase_t * puParm1
+) = (void *)0x00C68640;
+
+static
+__thiscall
+bayoVertexDeclarationBase_t *
+(*bayoVertexDeclarationBase_init)(
+	bayoVertexDeclarationBase_t * puParm1
+) = (void *)0x00C68440;
+
+static
+__thiscall
+void
+(*bayoVertexDeclarationBase_release)(
+	bayoVertexDeclarationBase_t * iParm1
+) = (void *)0x00C68670;
+
+static
+__thiscall
+int
+(*bayoVertexDeclarations_create)(
+	bayoVertexDeclarations_t * vertexDeclarations
+) = (void *)0x00D4EB00;
+
+static
+__thiscall
+void
+(*bayoVertexDeclarations_delete)(
+	bayoVertexDeclarations_t * vertexDeclarations
+) = (void *)0x00D4F7D0;
+
+static
+__thiscall
+undefined4
+(*bayoVertexDeclarations_getDeclaration)(
+	bayoVertexDeclarations_t * vertexDeclarations,
+	int reverseIndex,
+	int flag
+) = (void *)0x00D4F290;
+
+static
+__thiscall
+bayoVertexDeclarations_t *
+(*bayoVertexDeclarations_init)(
+	bayoVertexDeclarations_t * puParm1
+) = (void *)0x00D4F430;
+
+static
+__thiscall
+void
+(*bayoVertexDeclarations_releaseDeclarations)(
+	bayoVertexDeclarations_t * vertexDeclarations
+) = (void *)0x00D4F0A0;
+
+static
+__thiscall
+uint
+(*bayoVertexStreamData_allocNormals)(
+	bayoVertexStreamData_t * vertexStream,
+	void * pSource,
+	uint structSize,
+	uint numVertices,
+	void * allocator
+) = (void *)0x00C5F920;
+
+static
+__thiscall
+uint
+(*bayoVertexStreamData_bInited)(
+	bayoVertexStreamData_t * piParm1
+) = (void *)0x00C5F8C0;
+
+static
+__thiscall
+uint
+(*bayoVertexStreamData_getVertexCount)(
+	bayoVertexStreamData_t * streamData
+) = (void *)0x00C5F8D0;
+
+static
+__thiscall
+int
+(*bayoVertexStreamData_load)(
+	bayoVertexStreamData_t * vertexStream,
+	float * pVertexData,
+	uint structSize,
+	uint numVertices
+) = (void *)0x00C5F8F0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x0_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9D0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x10_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAB0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x11_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAC0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x12_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAD0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x13_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAE0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x14_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAF0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x15_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9C0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x16_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9A0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x17_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9B0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x18_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F300;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x19_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F310;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9F0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1a_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F320;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1b_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F2B0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1c_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F330;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1d_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F2C0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1e_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F340;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x1f_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F350;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x20_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F360;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x21_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F370;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x22_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F380;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x23_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F390;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x24_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3A0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x25_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3B0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x26_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3C0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x27_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3D0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x28_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3E0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x29_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F3F0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E9E0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2a_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F400;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2b_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F410;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2c_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F420;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2d_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F2F0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2e_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F2D0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x2f_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4F2E0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x3_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E980;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x4_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA00;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x5_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4E990;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x6_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA10;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x7_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA20;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x8_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA30;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0x9_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA40;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xa_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA50;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xb_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA60;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xc_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA70;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xd_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA80;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xe_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EAA0;
+
+static
+__thiscall
+int
+(*bayoVextexDeclaration0xf_create)(
+	bayoVertexDeclarationBase_t * pbParm1
+) = (void *)0x00D4EA90;
+
+static
+__thiscall
 int
 (*bayoWmb_allocNormalsWithCritical)(
 	bayoWmb_t * wmb,
-	bayoVertexBufferCacheItem_t * vertexBuffer,
+	bayoVertexStreamData_t * vertexStream,
 	uint meshIndex
 ) = (void *)0x004A6FC0;
 
@@ -3471,7 +4892,7 @@ static
 __thiscall
 void *
 (*bayoWmb_getVerticesPtr)(
-	wmbHeader_t * * pWmb
+	bayoWmb_t * pWmb
 ) = (void *)0x004A7170;
 
 static
@@ -3669,6 +5090,12 @@ __cdecl
 int
 (*bayo_beginScene)(
 void) = (void *)0x00C5EF40;
+
+static
+__cdecl
+void
+(*bayo_callDrawPrimitive)(
+void) = (void *)0x00C5DAA0;
 
 static
 __cdecl
@@ -3942,10 +5369,143 @@ int
 ) = (void *)0x004B78B0;
 
 static
+__cdecl
+int
+(*bayo_drawIndexedPrimitive)(
+void) = (void *)0x00C5DAF0;
+
+static
 __stdcall
 uint
 (*bayo_drawPrimitive)(
 void) = (void *)0x00C5DAB0;
+
+static
+__cdecl
+void
+(*bayo_effect_00da50ac_deinitializer)(
+void) = (void *)0x00D96460;
+
+static
+__cdecl
+void
+(*bayo_effect_00da50ac_initializer)(
+void) = (void *)0x00D7B3B0;
+
+static
+__thiscall
+int
+(*bayo_effect_00da50ac_load)(
+	bayoEffect_00da50ac_t * pbParm1
+) = (void *)0x00442E60;
+
+static
+__cdecl
+void
+(*bayo_effect_00da518c_deinitializer)(
+void) = (void *)0x00D964C0;
+
+static
+__cdecl
+void
+(*bayo_effect_00da518c_initializer)(
+void) = (void *)0x00D7B420;
+
+static
+__cdecl
+void
+(*bayo_effect_00da51f8_deinitializer)(
+void) = (void *)0x00D965A0;
+
+static
+__cdecl
+void
+(*bayo_effect_00da51f8_initializer)(
+void) = (void *)0x00D7B560;
+
+static
+__cdecl
+void
+(*bayo_effect_00da5778_deinitializer)(
+void) = (void *)0x00D96500;
+
+static
+__cdecl
+void
+(*bayo_effect_00da5778_initializer)(
+void) = (void *)0x00D7B470;
+
+static
+__cdecl
+void
+(*bayo_effect_00da5784_deinitializer)(
+void) = (void *)0x00D96510;
+
+static
+__cdecl
+void
+(*bayo_effect_00da5784_initializer)(
+void) = (void *)0x00D7B4D0;
+
+static
+__stdcall
+void
+(*bayo_effect_00eac430_deinitializer)(
+void) = (void *)0x00D993A0;
+
+static
+__stdcall
+void
+(*bayo_effect_00eac430_initializer)(
+void) = (void *)0x00D932A0;
+
+static
+__stdcall
+void
+(*bayo_effect_00eac444_deinitializer)(
+void) = (void *)0x00D99390;
+
+static
+__cdecl
+void
+(*bayo_effect_00eac444_initalizer)(
+void) = (void *)0x00D93280;
+
+static
+__stdcall
+void
+(*bayo_effect_00eac450_deinitializer)(
+void) = (void *)0x00D99370;
+
+static
+__cdecl
+void
+(*bayo_effect_00eac450_initializer)(
+void) = (void *)0x00D93240;
+
+static
+__cdecl
+void
+(*bayo_effect_00eac598__deinitialize)(
+void) = (void *)0x00D99380;
+
+static
+__stdcall
+void
+(*bayo_effect_00eac598_initialize)(
+void) = (void *)0x00D93260;
+
+static
+__cdecl
+void
+(*bayo_effect_00ed212c_deinitializer)(
+void) = (void *)0x00D99A40;
+
+static
+__cdecl
+void
+(*bayo_effect_00ed212c_initializer)(
+void) = (void *)0x00D93A30;
 
 static
 __cdecl
@@ -3997,6 +5557,12 @@ void *
 
 static
 __cdecl
+int
+(*bayo_getActiveLanguage)(
+void) = (void *)0x00C57520;
+
+static
+__cdecl
 uint
 (*bayo_getAllocSize)(
 	uint itemSize,
@@ -4014,6 +5580,12 @@ int
 	uint size,
 	int param_5
 ) = (void *)0x00C61B80;
+
+static
+__cdecl
+bayoHeapSub_t *
+(*bayo_getAssetBufferHeap)(
+void) = (void *)0x00C58770;
 
 static
 __cdecl
@@ -4053,6 +5625,20 @@ uint
 
 static
 __cdecl
+LPCSTR
+(*bayo_getFXFile)(
+	char * fileName
+) = (void *)0x0045AB70;
+
+static
+__cdecl
+uint
+(*bayo_getFXFileSize)(
+	char * param_1
+) = (void *)0x0045ABD0;
+
+static
+__cdecl
 int
 (*bayo_getFileSize)(
 	char * path
@@ -4060,7 +5646,7 @@ int
 
 static
 __cdecl
-bayoIndexStream_t *
+bayoIndexBufferCacheItem_t *
 (*bayo_getIndexBuffer)(
 	ushort * pIndices,
 	uint indexSize,
@@ -4087,7 +5673,7 @@ void
 
 static
 __cdecl
-bayoMaterialVectorTableItem_t *
+bayoMaterial_t *
 (*bayo_getMaterialFuncs)(
 	wmbMaterial_t * material
 ) = (void *)0x00D4E140;
@@ -4096,7 +5682,7 @@ static
 __cdecl
 int
 (*bayo_getMaterialProperty7)(
-	bayoMaterialVectorTableItem_t * a1
+	bayoMaterial_t * a1
 ) = (void *)0x00D4E540;
 
 static
@@ -4187,7 +5773,7 @@ static
 __cdecl
 int
 (*bayo_getVertexBufferWithCritical)(
-	bayoVertexBufferCacheItem_t * vertexBuffer,
+	bayoVertexStreamData_t * vertexStream,
 	void * pSource,
 	uint structSize,
 	uint numVertices,
@@ -4335,6 +5921,12 @@ void) = (void *)0x00C758B0;
 
 static
 __cdecl
+int
+(*bayo_initShaders)(
+void) = (void *)0x0045B520;
+
+static
+__cdecl
 void
 (*bayo_initStructArray)(
 	void * pArray,
@@ -4360,14 +5952,14 @@ static
 __cdecl
 int
 (*bayo_isMatPls05_BXNXB)(
-	bayoMaterialVectorTableItem_t * param_1
+	bayoMaterial_t * param_1
 ) = (void *)0x00D4E2D0;
 
 static
 __cdecl
 int
 (*bayo_isMaterialPls05_BXNXXorPls05_BXNXB)(
-	bayoMaterialVectorTableItem_t * param_1
+	bayoMaterial_t * param_1
 ) = (void *)0x00D4E2A0;
 
 static
@@ -4678,6 +6270,27 @@ int
 static
 __thiscall
 int
+(*bayo_load_pl0011_pl0011)(
+	bayoActorGarment_t * actor
+) = (void *)0x009F5160;
+
+static
+__thiscall
+int
+(*bayo_load_pl0013_pl0013)(
+	bayoActorGarment_t * actor
+) = (void *)0x009F7CE0;
+
+static
+__thiscall
+int
+(*bayo_load_pl001a_pl0031)(
+	bayoActorGarment_t * actor
+) = (void *)0x009FA9F0;
+
+static
+__thiscall
+int
 (*bayo_load_pl0020_pl0020)(
 	bayoPlayerModel_t * pbParm1
 ) = (void *)0x008C6A40;
@@ -4762,6 +6375,13 @@ int
 static
 __thiscall
 int
+(*bayo_load_pl0033_pl0033)(
+	bayoActorGarment_t * actor
+) = (void *)0x009FCB00;
+
+static
+__thiscall
+int
 (*bayo_load_pl004b_pl004b)(
 	bayoPlayerModel_t * pPlayer
 ) = (void *)0x008C8920;
@@ -4769,9 +6389,30 @@ int
 static
 __thiscall
 int
-(*bayo_load_pl0052_pl0052)(
+(*bayo_load_pl004c_pl004c)(
+	bayoActorGarment_t * actor
+) = (void *)0x00A17420;
+
+static
+__thiscall
+int
+(*bayo_load_pl0052_pl004b)(
 	bayoPlayerModel_t * pPlayer
 ) = (void *)0x008C8CA0;
+
+static
+__thiscall
+int
+(*bayo_load_pl0053_pl0053)(
+	bayoActorGarment_t * actor
+) = (void *)0x00A19760;
+
+static
+__thiscall
+int
+(*bayo_load_pl0054_pl0054)(
+	bayoActorGarment_t * actor
+) = (void *)0x00A1B410;
 
 static
 __thiscall
@@ -4908,6 +6549,18 @@ int
 
 static
 __cdecl
+void
+(*bayo_material_ModelShaderPls00_BXNXX_deinitializer)(
+void) = (void *)0x00D9A300;
+
+static
+__cdecl
+void
+(*bayo_material_ModelShaderPls00_BXNXX_initializer)(
+void) = (void *)0x00D945E0;
+
+static
+__cdecl
 int
 (*bayo_occlusionQueryIssueBegin)(
 	int queryIndex
@@ -4988,6 +6641,48 @@ bayoAllocator_t *
 static
 __cdecl
 int
+(*bayo_setBaseVertexIndex)(
+	INT param_1
+) = (void *)0x00C5DA90;
+
+static
+__stdcall
+int
+(*bayo_setCurrentIndexStream)(
+	bayoIndexStreamData_t * indexStream
+) = (void *)0x00C5D9F0;
+
+static
+__cdecl
+void
+(*bayo_setD3DCullMode)(
+	D3DCULL cullMode
+) = (void *)0x00C5E290;
+
+static
+__cdecl
+int
+(*bayo_setD3DCurrentEffect)(
+	bayoEffectBase_t * effect
+) = (void *)0x00C5DA40;
+
+static
+__cdecl
+void
+(*bayo_setD3DZBufferType)(
+	D3DZBUFFERTYPE param_1
+) = (void *)0x00C5E2B0;
+
+static
+__cdecl
+void
+(*bayo_setD3DZWriteEnable)(
+	BOOL param_1
+) = (void *)0x00C5E2E0;
+
+static
+__cdecl
+int
 (*bayo_setGameResolution)(
 	uint gameWidth,
 	uint gameHeight
@@ -5027,6 +6722,30 @@ int
 ) = (void *)0x00C77D70;
 
 static
+__cdecl
+void
+(*bayo_setIndexedPrimiritveTypeAndCount)(
+	D3DPRIMITIVETYPE primType,
+	uint primCount
+) = (void *)0x00C5E1E0;
+
+static
+__cdecl
+void
+(*bayo_setIndexedPrimitiveType)(
+	D3DPRIMITIVETYPE primType
+) = (void *)0x00C5F030;
+
+static
+__stdcall
+int
+(*bayo_setPixelShaderConstantF)(
+	UINT startRegister,
+	D3DXVECTOR4 * pConstantData,
+	uint * dataCount
+) = (void *)0x00C5FC30;
+
+static
 __thiscall
 void
 (*bayo_setPointerValueZero)(
@@ -5050,17 +6769,70 @@ void
 
 static
 __cdecl
+void
+(*bayo_setRenderStateAlphaBlendEnable)(
+	BOOL param_1
+) = (void *)0x00C5E390;
+
+static
+__cdecl
+void
+(*bayo_setRenderStateBlend)(
+	D3DBLEND srcBlend,
+	D3DBLEND dstBlend,
+	D3DBLENDOP blendOp
+) = (void *)0x00C5E3C0;
+
+static
+__cdecl
+void
+(*bayo_setShaderDat)(
+	void * param_1
+) = (void *)0x00D52D60;
+
+static
+__cdecl
 int
 (*bayo_setStream)(
 	uint streamNumber,
-	bayoStreamData_t * streamData
+	bayoVertexStreamData_t * streamData
 ) = (void *)0x00C5E0F0;
+
+static
+__cdecl
+int
+(*bayo_setVertexDeclaration)(
+	bayoVertexDeclarationBase_t * param_1
+) = (void *)0x00C5D9A0;
+
+static
+__cdecl
+int
+(*bayo_setVertexRange)(
+	uint vertexLimit,
+	uint minVertexIndex
+) = (void *)0x00C5DA60;
+
+static
+__cdecl
+int
+(*bayo_setVertexShaderConstantF)(
+	UINT startRegister,
+	float * pConstantData,
+	uint * dataCount
+) = (void *)0x00C5FB20;
 
 static
 __cdecl
 int
 (*bayo_setViewport)(
 void) = (void *)0x00C5D610;
+
+static
+__cdecl
+uint
+(*bayo_setViewportFromBackBuffer)(
+void) = (void *)0x00C5D560;
 
 static
 __cdecl
@@ -5274,7 +7046,7 @@ static
 __cdecl
 bool
 (*bayo_testMaterialProperty3equals1)(
-	bayoMaterialVectorTableItem_t * a1
+	bayoMaterial_t * a1
 ) = (void *)0x00D4E550;
 
 static
@@ -5283,6 +7055,18 @@ void *
 (*bayo_threadLauncher)(
 	bayoThread_t * param_1
 ) = (void *)0x00C63300;
+
+static
+__cdecl
+void
+(*bayo_vertexDeclarations_deinitializer)(
+void) = (void *)0x00D99810;
+
+static
+__stdcall
+void
+(*bayo_vertexDeclarations_initializer)(
+void) = (void *)0x00D937B0;
 
 static
 __stdcall
