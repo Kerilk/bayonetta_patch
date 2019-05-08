@@ -21,7 +21,7 @@ bayoActor_loadATT(struct bayoActor_t *actor, void *attHandle) {
 
     bayoActor_allocInitAttachPoints(actor,
                                     numAttachPoints,
-                                    pBayoHeap3);
+                                    heap_SCN);
     for(i = 0; i < numAttachPoints; i++) {
         bayoActor_attachBone(actor,
                              pAttachPoints[i].sourceBoneIndex,
@@ -67,7 +67,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
                     ((unsigned char*)flgHandle +
                      header->meshUnknownFlagsOffset);
         for (i = 0; i < header->meshUnknownFlagsCount; i++) {
-            mesh = bayoActor_getMesh(baseActor, uflgs[i].meshIndex);
+            mesh = bayoActorBase_getMesh(baseActor, uflgs[i].meshIndex);
             if (mesh) {
                 mesh->unknownFlags = uflgs[i].value;
             }
@@ -80,7 +80,7 @@ bayoActor_loadFLG(struct bayoActor_t *actor, void *flgHandle) {
                     ((unsigned char*)flgHandle +
                      header->meshUnknownSubstructFieldCOffset);
         for (i = 0; i <header->meshUnknownSubstructFieldCCount; i++) {
-            mesh = bayoActor_getMesh(baseActor, uflgs[i].meshIndex);
+            mesh = bayoActorBase_getMesh(baseActor, uflgs[i].meshIndex);
             if (mesh) {
                 bayoMesh_setUnknownSubstructFieldC(mesh, uflgs[i].value);
             }

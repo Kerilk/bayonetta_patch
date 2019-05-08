@@ -1,12 +1,12 @@
 #ifndef HELPER_FUNCS_H
 #define HELPER_FUNCS_H
 
-#define pBayoHeap3 ((struct bayoHeapBase_t *)0x05A57A78)
+#define heap_SCN ((struct bayoHeapBase_t *)0x05A57A78)
 
 #define MEMBER_ADDR_AT_OFFSET(ptr, offset) ((uintptr_t)(ptr) + offset)
 
 #define set_mesh_substruct_flags(actor, mesh, index, mask, flag) {\
-    mesh = bayoActor_getMesh(actor, index);\
+    mesh = bayoActorBase_getMesh((bayoActorBase_t*)actor, index);\
     if (mesh) {\
         mesh->pUnknownSubstruct->flags &= mask;\
         mesh->pUnknownSubstruct->flags |= flag;\

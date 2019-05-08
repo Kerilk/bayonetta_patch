@@ -36,7 +36,7 @@ bayo_load_pl0031_pl0031_new(struct bayoActorGarment_t *garment) {
 
     attHandle = bayo_getAssetHandle("pl0031.dat\\pl0031.att");
     if( !bayoActor_loadATT(actor, attHandle) ) {
-        bayoActor_allocInitAttachPoints(actor, 10, pBayoHeap3);
+        bayoActor_allocInitAttachPoints(actor, 10, heap_SCN);
         bayoActor_attachBone(actor,  91,  3, 0);
         bayoActor_attachBone(actor,  92,  4, 0);
         bayoActor_attachBone(actor,  93,  5, 0);
@@ -64,7 +64,7 @@ bayo_load_pl0031_pl0031_new(struct bayoActorGarment_t *garment) {
         set_mesh_substruct_flags(actor, mesh, 16, 0xFFFFFFFE, 0x00000000);
 
 
-        mesh = bayoActor_getMesh(actor, 17);
+        mesh = bayoActorBase_getMesh((bayoActorBase_t*)actor, 17);
         if (mesh) {
             mesh->pUnknownSubstruct->flags &= 0xFFFFFFBB;
             mesh->pUnknownSubstruct->flags |= 0x00002000;

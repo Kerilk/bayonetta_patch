@@ -30,7 +30,7 @@ bayo_load_pl0012_pl0012_new(struct bayoActorGarment_t *garment) {
 
     attHandle = bayo_getAssetHandle("pl0012.dat\\pl0012.att");
     if (!bayoActor_loadATT(actor, attHandle)) {
-        bayoActor_allocInitAttachPoints(actor, 3, pBayoHeap3);
+        bayoActor_allocInitAttachPoints(actor, 3, heap_SCN);
         bayoActor_attachBone(actor, 0, 9, 0);
         bayoActor_attachBone(actor, 41, 15, 0);
         bayoActor_attachBone(actor, 82, 6, 0);
