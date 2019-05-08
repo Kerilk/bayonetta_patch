@@ -71,6 +71,7 @@ public class exportBayonettaFunctions extends GhidraScript {
 
 			if (function.getSignatureSource() == SourceType.USER_DEFINED && !function.getName().startsWith("j_")
 					&& !function.getName().startsWith("nullsub") && !function.getName().startsWith("FUN_")
+					&& !function.getName().startsWith("__libm_")
 					&& (!function.isThunk() || function.getThunkedFunction(false).isExternal())
 					&& function.getEntryPoint().getOffset() < 0x05DB8000) {
 
