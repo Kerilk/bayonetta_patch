@@ -37,7 +37,7 @@ bayo_load_pl004c_pl004c_new(struct bayoActorGarment_t *garment) {
     wtbHandle = bayo_getAssetHandle(pl004c_pl004ctexD_wtb);
     bayoSamplers_loadWTBStatic(garment->samplers + 3, wtbHandle);
 
-    attHandle = bayo_getAssetHandle("pl004c\\pl004c.att");
+    attHandle = bayo_getAssetHandle("pl004c.dat\\pl004c.att");
     if( !bayoActor_loadATT(actor, attHandle) ) {
         bayoActor_allocInitAttachPoints(actor, 3, heap_SCN);
         bayoActor_attachBone(actor,  0,  9, 0);
@@ -47,7 +47,7 @@ bayo_load_pl004c_pl004c_new(struct bayoActorGarment_t *garment) {
 
     bayoActor_setMeshesUnknownFlags(actor, 0x13);
 
-    flgHandle = bayo_getAssetHandle("pl004c\\pl004c.flg");
+    flgHandle = bayo_getAssetHandle("pl004c.dat\\pl004c.flg");
     if (!bayoActor_loadFLG(actor, flgHandle)) {
         set_mesh_substruct_flags(actor, mesh,  0, 0xFFFFFFBF, 0x00002000);
         set_mesh_substruct_flags(actor, mesh,  1, 0xFFFFFFBF, 0x00002000);
