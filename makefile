@@ -17,7 +17,7 @@ patch: all bsdiff-v4.3-win-x64.zip
 	echo "  bspatch.exe Bayonetta.bak Bayonetta.exe Bayonetta.`cat VERSION`.diff" >> out/bayo_batch.bat
 	echo ") ELSE (" >> out/bayo_batch.bat
 	echo "  copy Bayonetta.exe Bayonetta.bak" >> out/bayo_batch.bat
-	echo "  bspatch.exe Bayonetta.bak Bayonetta.`cat VERSION`.diff Bayonetta.exe" >> out/bayo_batch.bat
+	echo "  bspatch.exe Bayonetta.bak Bayonetta.exe Bayonetta.`cat VERSION`.diff" >> out/bayo_batch.bat
 	echo ")" >> out/bayo_batch.bat
 	zip -j out/bayo_patch.`cat VERSION`.zip out/bayo_batch.bat out/Bayonetta.`cat VERSION`.diff CHANGELOG.md README.txt
 
